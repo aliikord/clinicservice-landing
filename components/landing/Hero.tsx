@@ -2,19 +2,13 @@ import Link from "next/link";
 import { ArrowRight, Play } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Aurora } from "./Aurora";
 
 export function Hero() {
   return (
     <section className="relative overflow-hidden pt-24 pb-16 text-center md:pt-32">
-      {/* Top halo glow */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute left-1/2 top-[-300px] z-0 h-[1000px] w-[1600px] -translate-x-1/2 blur-[50px]"
-        style={{
-          background:
-            "radial-gradient(ellipse at center top, rgba(91,139,255,0.25) 0%, rgba(0,23,108,0.35) 22%, rgba(91,139,255,0.08) 45%, transparent 70%)",
-        }}
-      />
+      {/* Aurora mesh background */}
+      <Aurora />
       <div className="relative z-10 mx-auto max-w-[1200px] px-6">
         <Badge
           variant="outline"
@@ -25,11 +19,19 @@ export function Hero() {
         </Badge>
 
         <h1 className="text-balance text-[clamp(56px,9vw,144px)] font-bold leading-[0.95] tracking-[-0.04em]">
-          Le système d&apos;
-          <span className="text-blue-gradient font-serif italic">exploitation</span>
+          <span className="word-reveal" style={{ animationDelay: "0ms" }}>Le</span>{" "}
+          <span className="word-reveal" style={{ animationDelay: "80ms" }}>système</span>{" "}
+          <span className="word-reveal" style={{ animationDelay: "160ms" }}>d&apos;</span>
+          <span className="word-reveal text-blue-gradient font-serif italic" style={{ animationDelay: "240ms" }}>
+            exploitation
+          </span>
           <br />
-          des cliniques{" "}
-          <span className="wave-grad inline-block rounded-[22px] px-4 pb-2.5 text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.30),0_16px_48px_rgba(0,23,108,0.6),0_0_0_1px_rgba(91,139,255,0.22)]">
+          <span className="word-reveal" style={{ animationDelay: "320ms" }}>des</span>{" "}
+          <span className="word-reveal" style={{ animationDelay: "400ms" }}>cliniques</span>{" "}
+          <span
+            className="wave-grad word-reveal inline-block rounded-[22px] px-4 pb-2.5 text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.30),0_16px_48px_rgba(0,23,108,0.6),0_0_0_1px_rgba(91,139,255,0.22)]"
+            style={{ animationDelay: "480ms" }}
+          >
             dentaires.
           </span>
         </h1>

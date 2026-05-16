@@ -1,5 +1,6 @@
 import { Users, CreditCard, Calendar, Globe, GitBranch, Shield } from "lucide-react";
 import { Card } from "@/components/ui/card";
+import { TiltCard } from "./TiltCard";
 
 type BCardProps = {
   num: string;
@@ -14,8 +15,9 @@ type BCardProps = {
 
 function BCard({ num, Icon, title, desc, children, span = "", rowSpan = "", feature = false }: BCardProps) {
   return (
+    <TiltCard className={`${span} ${rowSpan}`} max={feature ? 4 : 5}>
     <Card
-      className={`${feature ? "glass-blue glass-shimmer glass-caustic" : "glass"} glass-hover relative flex flex-col gap-0 overflow-hidden rounded-2xl p-6 ${span} ${rowSpan}`}
+      className={`${feature ? "glass-blue glass-shimmer glass-caustic" : "glass"} glass-hover beam-container relative flex h-full flex-col gap-0 overflow-hidden rounded-2xl p-6`}
     >
       <div className="relative z-[2] mb-3 font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
         {num}
@@ -27,6 +29,7 @@ function BCard({ num, Icon, title, desc, children, span = "", rowSpan = "", feat
       <p className="relative z-[2] text-[13px] leading-[1.55] text-muted-foreground">{desc}</p>
       <div className="relative z-[2]">{children}</div>
     </Card>
+    </TiltCard>
   );
 }
 

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Geist_Mono, Fraunces } from "next/font/google";
 import Script from "next/script";
+import { MouseFollower } from "@/components/landing/MouseFollower";
 import "./globals.css";
 
 const inter = Inter({
@@ -44,6 +45,7 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-screen bg-background text-foreground">
+        <MouseFollower />
         {children}
       </body>
     </html>
