@@ -4,6 +4,7 @@ import { Marquee } from "@/components/landing/Marquee";
 import { About } from "@/components/landing/About";
 import { StatsStrip } from "@/components/landing/StatsStrip";
 import { Features } from "@/components/landing/Features";
+import { DeviceShowcase } from "@/components/landing/DeviceShowcase";
 import { PowerFeatures } from "@/components/landing/PowerFeatures";
 import { AllFeatures } from "@/components/landing/AllFeatures";
 import { DashboardMockup } from "@/components/landing/DashboardMockup";
@@ -27,6 +28,7 @@ export default function HomePage() {
         <About />
         <StatsStrip />
         <Features />
+        <DeviceShowcase />
         <PowerFeatures />
         <AllFeatures />
         <DashboardMockup />
