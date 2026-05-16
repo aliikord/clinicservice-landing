@@ -2,40 +2,101 @@
 
 Marketing landing page for ClinicService, the operating system for dental clinics in Algeria.
 
-## Preview
+Built with **Next.js 16 + TypeScript + Tailwind v4 + shadcn/ui (Radix + Nova preset)** — designed to lift directly into the ClinicService SaaS.
 
-Open `index.html` directly in a browser — no build step required.
+## Quick start
 
 ```bash
-open index.html
-# or
-python3 -m http.server 8000  # then visit http://localhost:8000
+pnpm install
+pnpm dev
+# → http://localhost:3000
 ```
+
+## Build
+
+```bash
+pnpm build           # static export to ./out
+pnpm start           # only useful if you remove `output: 'export'`
+```
+
+## Deploy
+
+The repo is set up to deploy to **GitHub Pages** via the workflow at `.github/workflows/deploy.yml`. Every push to `main` rebuilds and publishes.
+
+Live preview: https://aliikord.github.io/clinicservice-landing/
+
+### Integrating into your SaaS (no GitHub Pages prefix)
+
+The landing assumes it's served at `/clinicservice-landing/` on GitHub Pages. For your real SaaS / Vercel / custom domain, **unset the base path** at build time:
+
+```bash
+NEXT_PUBLIC_BASE_PATH="" pnpm build
+```
+
+Or edit `next.config.ts` and remove the `basePath` / `assetPrefix` lines.
 
 ## Stack
 
-- Pure HTML + CSS — no framework, no build
-- Google Fonts: Inter, Geist Mono
-- Single file: `index.html`
+| Layer | Tool |
+| --- | --- |
+| Framework | Next.js 16 (App Router, Turbopack) |
+| Language | TypeScript |
+| Styling | Tailwind CSS v4 |
+| Components | shadcn/ui — Radix primitives, Nova preset (Lucide icons, Geist Mono) |
+| Fonts | Inter (UI), Fraunces (italic accents), Geist Mono (numbers/labels) |
+| Video | Wistia (`ko3v3y0pu8`) |
 
-## Design
+## Structure
 
-- Dark agency aesthetic — pure black background, lime green accent (`#c5ff3d`)
-- Numbered sections (01-08) with monospace eyebrows
-- Sections: Hero → Marquee → Services → Julia AI → Process → Testimonial → Stats → Comparison → FAQ → CTA → Footer
+```
+app/
+├── layout.tsx          # root layout, fonts, Wistia scripts
+├── page.tsx            # composes all sections
+└── globals.css         # brand tokens (#00176c · #5b8bff · #b9c8ff)
 
-## Editing
+components/
+├── ui/                 # shadcn primitives (Button, Card, Accordion, …)
+└── landing/            # page sections
+    ├── SiteHeader.tsx
+    ├── Hero.tsx
+    ├── VslPlayer.tsx       # Wistia video with halo + orbital rings
+    ├── Marquee.tsx
+    ├── About.tsx           # big stroke-text intro
+    ├── StatsStrip.tsx
+    ├── Features.tsx        # bento grid with mock UIs
+    ├── DashboardMockup.tsx # fake app screenshot
+    ├── Julia.tsx           # AI section with glowing orb + chat
+    ├── Process.tsx         # 4 numbered steps
+    ├── Testimonial.tsx     # serif quote
+    ├── CompareTable.tsx
+    ├── Faq.tsx             # shadcn Accordion
+    ├── Cta.tsx
+    └── SiteFooter.tsx
 
-Search and replace these placeholders before going live:
+public/
+└── logo.png
+```
 
-- `+213 XX XX XX XX` — phone number
-- `wa.me/213XXXXXXXXX` — WhatsApp number
-- `contact@clinicservice.app` — contact email
-- Trust strip clinic names (`Zekri Dental`, `Clinique Atlas`, etc.)
+## Editing checklist (before going live)
 
-## Integration into the SaaS
+Search & replace these placeholders:
 
-This file is intended to be lifted into the ClinicService web app as the public marketing page. Most of the styles are scoped via CSS variables under `:root` — easy to map onto your design system.
+- `+213 XX XX XX XX` → real phone
+- `wa.me/213XXXXXXXXX` → real WhatsApp link
+- `contact@clinicservice.app` → real email
+- Trust strip clinic names in `Marquee.tsx`
+- Wistia media-id `ko3v3y0pu8` in `VslPlayer.tsx` + `layout.tsx`
+
+## Design tokens
+
+```ts
+brand:        #00176c   // deep navy (button bg)
+brand-mid:    #2c54d4   // gradients
+brand-bright: #5b8bff   // text accents on dark
+brand-soft:   #b9c8ff   // highlights
+```
+
+All defined as CSS variables in `app/globals.css` so they map onto the shadcn theme system.
 
 ## License
 

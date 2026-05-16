@@ -1,5 +1,30 @@
-.DS_Store
+# Dependencies
 node_modules/
+.pnp
+.pnp.*
+.yarn/*
+
+# Testing
+coverage/
+
+# Next.js
+.next/
+out/
+build/
+*.tsbuildinfo
+next-env.d.ts
+
+# Production
+*.log
+.DS_Store
+*.pem
+
+# Env files
+.env*
+
+# Vercel
+.vercel
+
+# IDE
 .vscode/
 .idea/
-*.log
