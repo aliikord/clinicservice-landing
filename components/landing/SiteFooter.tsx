@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Image from "next/image";
+import { asset } from "@/lib/site";
 
 const SECTIONS = [
   {
@@ -40,12 +40,12 @@ export function SiteFooter() {
             <Link href="/" className="flex items-center gap-2.5 font-bold tracking-tight">
               <span className="relative flex size-10 items-center justify-center">
                 <span aria-hidden className="absolute inset-0 rounded-xl bg-[radial-gradient(circle,rgba(91,139,255,0.4),transparent_70%)] blur-md" />
-                <Image
-                  src="/logo.png"
+                <img
+                  src={asset("/logo.png")}
                   alt="ClinicService"
                   width={40}
                   height={40}
-                  className="relative drop-shadow-[0_0_8px_rgba(255,255,255,0.4)] drop-shadow-[0_0_20px_rgba(91,139,255,0.6)]"
+                  className="relative size-10 drop-shadow-[0_0_8px_rgba(255,255,255,0.4)] drop-shadow-[0_0_20px_rgba(91,139,255,0.6)]"
                 />
               </span>
               <span className="text-[17px]">ClinicService</span>

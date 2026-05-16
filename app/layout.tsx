@@ -21,11 +21,13 @@ const fraunces = Fraunces({
   weight: ["300", "400"],
 });
 
+const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH ?? "/clinicservice-landing";
+
 export const metadata: Metadata = {
   title: "ClinicService — Le système d'exploitation des cliniques dentaires",
   description:
     "ClinicService digitalise votre flux patient. Conçu en Algérie, augmenté par l'IA Julia.",
-  icons: { icon: "/logo.png" },
+  icons: { icon: `${BASE_PATH}/logo.png` },
 };
 
 export default function RootLayout({
