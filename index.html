@@ -17,8 +17,9 @@
     --text: #f5f5f5;
     --text-2: #a3a3a3;
     --text-3: #737373;
-    --accent: #c5ff3d;
-    --accent-fg: #0a0a0a;
+    --accent: #00176c;
+    --accent-fg: #ffffff;
+    --accent-bright: #5b8bff;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
@@ -50,7 +51,7 @@
     font-size: 13px; font-weight: 400; color: var(--text-2);
     text-transform: uppercase; letter-spacing: 0.05em;
   }
-  .eyebrow .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+  .eyebrow .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent-bright); box-shadow: 0 0 8px var(--accent-bright); }
 
   /* Buttons */
   .btn {
@@ -61,7 +62,7 @@
     white-space: nowrap;
   }
   .btn-primary { background: var(--accent); color: var(--accent-fg); }
-  .btn-primary:hover { background: #d6fe51; transform: translateY(-1px); }
+  .btn-primary:hover { background: #002a9e; transform: translateY(-1px); }
   .btn-ghost { background: transparent; color: var(--text); border-color: var(--line-2); }
   .btn-ghost:hover { background: var(--bg-2); border-color: #404040; }
   .btn-arrow { width: 16px; height: 16px; }
@@ -74,7 +75,7 @@
   }
   .nav-row { display: flex; align-items: center; justify-content: space-between; padding: 18px 0; }
   .logo { display: flex; align-items: center; gap: 10px; font-weight: 600; letter-spacing: -0.01em; font-size: 17px; text-decoration: none; color: var(--text); }
-  .logo-dot { width: 24px; height: 24px; border-radius: 6px; background: var(--accent); display: inline-block; }
+  .logo-dot { width: 28px; height: 28px; display: inline-block; background-image: url('logo.png'); background-size: contain; background-repeat: no-repeat; background-position: center; }
   .nav-links { display: none; gap: 32px; }
   .nav-links a { color: var(--text-2); text-decoration: none; font-size: 14px; transition: color 0.15s; }
   .nav-links a:hover { color: var(--text); }
@@ -84,7 +85,7 @@
   /* Hero */
   .hero { padding: 120px 0 80px; border-top: none; }
   .hero h1 { max-width: 1100px; margin: 24px 0 0; }
-  .hero h1 .accent-text { color: var(--accent); font-style: italic; font-weight: 400; }
+  .hero h1 .accent-text { color: var(--accent-bright); font-style: italic; font-weight: 400; }
   .hero-sub { max-width: 640px; margin-top: 32px; font-size: 19px; color: var(--text-2); line-height: 1.55; }
   .hero-cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 40px; }
   .hero-meta { display: flex; flex-wrap: wrap; gap: 32px; margin-top: 64px; padding-top: 32px; border-top: 1px solid var(--line); }
@@ -130,7 +131,7 @@
     width: 48px; height: 48px; border-radius: 12px; background: #1a1a1a;
     display: inline-flex; align-items: center; justify-content: center;
     border: 1px solid var(--line-2);
-    color: var(--accent);
+    color: var(--accent-bright);
   }
 
   /* Big-text section */
@@ -139,14 +140,14 @@
     letter-spacing: -0.02em; max-width: 1200px;
   }
   .big-text strong { font-weight: 600; }
-  .big-text .accent-text { color: var(--accent); font-style: italic; font-weight: 400; }
+  .big-text .accent-text { color: var(--accent-bright); font-style: italic; font-weight: 400; }
 
   /* Process steps */
   .steps { display: grid; gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 20px; overflow: hidden; }
   @media (min-width: 700px) { .steps { grid-template-columns: 1fr 1fr; } }
   @media (min-width: 1024px) { .steps { grid-template-columns: 1fr 1fr 1fr 1fr; } }
   .step { background: var(--bg); padding: 32px; min-height: 240px; display: flex; flex-direction: column; gap: 16px; }
-  .step .step-num { font-family: 'Geist Mono', monospace; font-size: 12px; color: var(--accent); }
+  .step .step-num { font-family: 'Geist Mono', monospace; font-size: 12px; color: var(--accent-bright); }
   .step h4 { font-size: 22px; font-weight: 500; letter-spacing: -0.02em; }
   .step p { color: var(--text-2); font-size: 14px; line-height: 1.55; }
 
@@ -154,7 +155,7 @@
   .stats { display: grid; gap: 24px; grid-template-columns: 1fr 1fr; padding: 48px 0; }
   @media (min-width: 900px) { .stats { grid-template-columns: 1fr 1fr 1fr 1fr; } }
   .stat .num { font-size: clamp(48px, 5vw, 72px); font-weight: 500; letter-spacing: -0.03em; line-height: 1; }
-  .stat .num .unit { color: var(--accent); }
+  .stat .num .unit { color: var(--accent-bright); }
   .stat .lbl { color: var(--text-2); font-size: 14px; margin-top: 12px; line-height: 1.4; }
 
   /* Pricing */
@@ -181,7 +182,7 @@
   .price-line { font-size: 13px; color: var(--text-2); }
   .feat { list-style: none; display: flex; flex-direction: column; gap: 10px; font-size: 14px; flex: 1; }
   .feat li { display: flex; gap: 10px; color: var(--text-2); }
-  .feat li::before { content: '+'; color: var(--accent); font-weight: 600; }
+  .feat li::before { content: '+'; color: var(--accent-bright); font-weight: 600; }
   .price-card.featured .feat li::before { color: var(--accent-fg); }
   .price-foot { font-size: 12px; color: var(--text-3); }
 
@@ -215,10 +216,10 @@
     border: 1px solid var(--line); border-radius: 24px; padding: 48px;
     background: var(--bg-2);
   }
-  .quote-mark { font-family: serif; font-size: 80px; line-height: 0.5; color: var(--accent); height: 32px; }
+  .quote-mark { font-family: serif; font-size: 80px; line-height: 0.5; color: var(--accent-bright); height: 32px; }
   .quote-text { font-size: clamp(20px, 2.5vw, 32px); font-weight: 400; line-height: 1.35; letter-spacing: -0.01em; margin: 24px 0 32px; max-width: 920px; }
   .quote-meta { display: flex; align-items: center; gap: 16px; }
-  .quote-avatar { width: 48px; height: 48px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), #8fc83a); color: var(--accent-fg); font-weight: 700; display: inline-flex; align-items: center; justify-content: center; }
+  .quote-avatar { width: 48px; height: 48px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), var(--accent-bright)); color: var(--accent-fg); font-weight: 700; display: inline-flex; align-items: center; justify-content: center; }
   .quote-name { font-weight: 500; }
   .quote-role { color: var(--text-3); font-size: 13px; }
 
@@ -231,10 +232,10 @@
   .compare td { padding: 16px 24px; border-bottom: 1px solid var(--line); }
   .compare tr:last-child td { border-bottom: none; }
   .compare td.feat-name { font-weight: 500; }
-  .compare td.cs-col { background: rgba(197, 255, 61, 0.04); color: var(--text); border-left: 1px solid rgba(197,255,61,0.2); border-right: 1px solid rgba(197,255,61,0.2); }
-  .compare tr:last-child td.cs-col { border-bottom: 1px solid rgba(197,255,61,0.2); }
-  .compare th.cs-col { background: rgba(197,255,61,0.06); color: var(--accent); border-left: 1px solid rgba(197,255,61,0.2); border-right: 1px solid rgba(197,255,61,0.2); border-top: 1px solid rgba(197,255,61,0.2); }
-  .check { color: var(--accent); }
+  .compare td.cs-col { background: rgba(91, 139, 255, 0.05); color: var(--text); border-left: 1px solid rgba(91,139,255,0.25); border-right: 1px solid rgba(91,139,255,0.25); }
+  .compare tr:last-child td.cs-col { border-bottom: 1px solid rgba(91,139,255,0.25); }
+  .compare th.cs-col { background: rgba(91,139,255,0.08); color: var(--accent-bright); border-left: 1px solid rgba(91,139,255,0.25); border-right: 1px solid rgba(91,139,255,0.25); border-top: 1px solid rgba(91,139,255,0.25); }
+  .check { color: var(--accent-bright); }
 
   /* Footer */
   footer.foot { padding: 64px 0 32px; border-top: 1px solid var(--line); }
@@ -415,7 +416,7 @@
         <div class="eyebrow"><span class="dot"></span> 02 — Intelligence augmentée</div>
       </div>
       <div>
-        <h2>Rencontrez <span style="color: var(--accent); font-style: italic; font-weight: 400;">Julia.</span></h2>
+        <h2>Rencontrez <span style="color: var(--accent-bright); font-style: italic; font-weight: 400;">Julia.</span></h2>
       </div>
     </div>
 
@@ -491,7 +492,7 @@
     <div class="testimonial" data-reveal>
       <div class="quote-mark">"</div>
       <p class="quote-text">
-        Avant ClinicService, nos 24 boxes étaient pilotées sur 12 cahiers et 4 fichiers Excel. Aujourd'hui, je vois en temps réel chaque encaissement, chaque file d'attente, chaque retard. Ma productivité a augmenté de <span class="accent-text" style="color: var(--accent);">40%</span> en 4 mois.
+        Avant ClinicService, nos 24 boxes étaient pilotées sur 12 cahiers et 4 fichiers Excel. Aujourd'hui, je vois en temps réel chaque encaissement, chaque file d'attente, chaque retard. Ma productivité a augmenté de <span class="accent-text" style="color: var(--accent-bright);">40%</span> en 4 mois.
       </p>
       <div class="quote-meta">
         <div class="quote-avatar">DZ</div>
@@ -600,7 +601,7 @@
             <td class="feat-name">Risque de perte / fraude</td>
             <td style="color: #f87171;">Élevé</td>
             <td style="color: #fbbf24;">Modéré</td>
-            <td class="cs-col" style="color: var(--accent);">Audit complet</td>
+            <td class="cs-col" style="color: var(--accent-bright);">Audit complet</td>
           </tr>
         </tbody>
       </table>
