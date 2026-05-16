@@ -77,7 +77,13 @@ export function DashboardMockup() {
             <div className="grid min-h-[460px] grid-cols-1 md:grid-cols-[210px_1fr]">
               <aside className="hidden flex-col gap-0.5 border-r border-border bg-card/40 p-4 md:flex">
                 <div className="mb-3 flex items-center gap-2.5 px-2 py-1.5">
-                  <Image src="/logo.png" alt="" width={20} height={20} />
+                  <Image
+                    src="/logo.png"
+                    alt=""
+                    width={22}
+                    height={22}
+                    className="drop-shadow-[0_0_6px_rgba(255,255,255,0.3)] drop-shadow-[0_0_12px_rgba(91,139,255,0.5)]"
+                  />
                   <span className="text-[13px] font-semibold">ClinicService</span>
                 </div>
                 {LINKS.map(({ icon: Icon, label, active }) => (

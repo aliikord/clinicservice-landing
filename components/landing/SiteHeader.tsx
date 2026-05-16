@@ -15,14 +15,18 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-50 px-3 pt-3 md:px-6 md:pt-4">
       <div className="glass-pill mx-auto flex max-w-7xl items-center justify-between gap-4 rounded-full px-4 py-2">
-        <Link href="/" className="flex items-center gap-2.5 px-2 font-bold tracking-tight">
-          <Image
-            src="/logo.png"
-            alt="ClinicService"
-            width={28}
-            height={28}
-            className="drop-shadow-[0_0_14px_rgba(91,139,255,0.35)]"
-          />
+        <Link href="/" className="group flex items-center gap-2.5 px-2 font-bold tracking-tight">
+          <span className="relative flex size-9 items-center justify-center">
+            <span aria-hidden className="absolute inset-0 rounded-xl bg-[radial-gradient(circle,rgba(91,139,255,0.4),transparent_70%)] blur-md transition-opacity group-hover:opacity-100" />
+            <Image
+              src="/logo.png"
+              alt="ClinicService"
+              width={36}
+              height={36}
+              className="relative drop-shadow-[0_0_8px_rgba(255,255,255,0.4)] drop-shadow-[0_0_20px_rgba(91,139,255,0.6)]"
+              priority
+            />
+          </span>
           <span className="text-[16px]">ClinicService</span>
         </Link>
         <nav className="hidden items-center gap-1 lg:flex">

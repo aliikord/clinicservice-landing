@@ -38,13 +38,16 @@ export function SiteFooter() {
         <div className="mb-14 grid grid-cols-1 gap-12 md:grid-cols-[2fr_1fr_1fr_1fr]">
           <div>
             <Link href="/" className="flex items-center gap-2.5 font-bold tracking-tight">
-              <Image
-                src="/logo.png"
-                alt="ClinicService"
-                width={32}
-                height={32}
-                className="drop-shadow-[0_0_14px_rgba(91,139,255,0.35)]"
-              />
+              <span className="relative flex size-10 items-center justify-center">
+                <span aria-hidden className="absolute inset-0 rounded-xl bg-[radial-gradient(circle,rgba(91,139,255,0.4),transparent_70%)] blur-md" />
+                <Image
+                  src="/logo.png"
+                  alt="ClinicService"
+                  width={40}
+                  height={40}
+                  className="relative drop-shadow-[0_0_8px_rgba(255,255,255,0.4)] drop-shadow-[0_0_20px_rgba(91,139,255,0.6)]"
+                />
+              </span>
               <span className="text-[17px]">ClinicService</span>
             </Link>
             <p className="mt-4 max-w-[320px] text-[14px] leading-[1.55] text-muted-foreground">
