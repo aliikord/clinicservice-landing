@@ -3,23 +3,34 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta name="description" content="ClinicService — Le système d'exploitation des cliniques dentaires. Workflow patient, IA dédiée, caisse temps réel, dossier complet." />
-<title>ClinicService — Le système d'exploitation de votre clinique</title>
+<meta name="description" content="ClinicService — Le système d'exploitation des cliniques dentaires. Conçu en Algérie, augmenté par IA." />
+<title>ClinicService — Le système d'exploitation des cliniques dentaires</title>
+<link rel="icon" type="image/png" href="logo.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@1,9..144,300;1,9..144,400&family=Inter:wght@300;400;500;600;700;800;900&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <style>
   :root {
-    --bg: #0a0a0a;
-    --bg-2: #111111;
-    --line: #1f1f1f;
-    --line-2: #2a2a2a;
-    --text: #f5f5f5;
-    --text-2: #a3a3a3;
-    --text-3: #737373;
-    --accent: #00176c;
-    --accent-fg: #ffffff;
-    --accent-bright: #5b8bff;
+    --bg: #050507;
+    --bg-2: #0c0c10;
+    --surface: #111114;
+    --surface-2: #16161a;
+    --line: #1d1d22;
+    --line-2: #2a2a32;
+    --text: #f5f6f8;
+    --text-2: #a8aab5;
+    --text-3: #6c6e7a;
+    --text-4: #43454f;
+
+    --accent: #00176c;            /* deep navy — primary brand */
+    --accent-mid: #2c54d4;        /* mid for gradients */
+    --accent-bright: #5b8bff;     /* text accents / glows on dark */
+    --accent-soft: #b9c8ff;       /* lavender highlight */
+    --accent-glow: rgba(91,139,255,0.45);
+
+    --good: #4ade80;
+    --warn: #fbbf24;
+    --bad: #f87171;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
@@ -30,238 +41,737 @@
     -webkit-font-smoothing: antialiased;
     line-height: 1.5;
     font-feature-settings: "ss01", "cv11";
+    overflow-x: hidden;
+    position: relative;
   }
+  /* Ambient grain */
+  body::before {
+    content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 200;
+    opacity: 0.04; mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  /* Subtle dot grid background */
+  body::after {
+    content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 0;
+    background-image:
+      radial-gradient(rgba(91,139,255,0.06) 1px, transparent 1px);
+    background-size: 32px 32px;
+    mask-image: linear-gradient(180deg, transparent, black 20%, black 80%, transparent);
+  }
+
   .mono { font-family: 'Geist Mono', ui-monospace, monospace; }
+  .serif { font-family: 'Fraunces', Georgia, serif; font-style: italic; font-weight: 400; }
 
   /* Layout */
-  .wrap { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
-  section { padding: 96px 0; border-top: 1px solid var(--line); }
-  @media (max-width: 768px) { section { padding: 64px 0; } }
+  .wrap { max-width: 1280px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 2; }
+  section { padding: 120px 0; border-top: 1px solid var(--line); position: relative; }
+  @media (max-width: 768px) { section { padding: 72px 0; } }
 
   /* Typography */
-  h1, h2, h3, h4 { letter-spacing: -0.02em; line-height: 1.05; font-weight: 500; }
-  h1 { font-size: clamp(48px, 8vw, 120px); font-weight: 500; }
-  h2 { font-size: clamp(36px, 5vw, 72px); }
-  h3 { font-size: clamp(20px, 2vw, 28px); font-weight: 500; }
+  h1, h2, h3, h4 { letter-spacing: -0.025em; line-height: 1.05; font-weight: 600; }
+  h1 { font-size: clamp(48px, 8vw, 120px); font-weight: 600; letter-spacing: -0.035em; }
+  h2 { font-size: clamp(36px, 5vw, 72px); font-weight: 600; }
+  h3 { font-size: clamp(20px, 2vw, 28px); font-weight: 600; }
 
-  /* Eyebrow */
+  /* Eyebrow chip */
   .eyebrow {
-    display: inline-flex; align-items: center; gap: 8px;
-    font-family: 'Geist Mono', ui-monospace, monospace;
-    font-size: 13px; font-weight: 400; color: var(--text-2);
-    text-transform: uppercase; letter-spacing: 0.05em;
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 6px 14px;
+    background: rgba(91,139,255,0.06);
+    border: 1px solid rgba(91,139,255,0.18);
+    border-radius: 999px;
+    font-family: 'Geist Mono', monospace;
+    font-size: 12px; font-weight: 400;
+    color: var(--accent-bright);
+    text-transform: uppercase; letter-spacing: 0.10em;
   }
-  .eyebrow .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent-bright); box-shadow: 0 0 8px var(--accent-bright); }
+  .eyebrow .dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--accent-bright);
+    box-shadow: 0 0 10px var(--accent-bright);
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(91,139,255,0.6); }
+    50% { box-shadow: 0 0 0 6px rgba(91,139,255,0); }
+  }
 
   /* Buttons */
   .btn {
-    display: inline-flex; align-items: center; gap: 10px;
+    display: inline-flex; align-items: center; justify-content: center; gap: 10px;
     padding: 14px 24px; font-size: 15px; font-weight: 500;
-    border-radius: 999px; transition: all 0.15s ease;
+    border-radius: 999px; transition: all 0.2s ease;
     border: 1px solid transparent; cursor: pointer; text-decoration: none;
-    white-space: nowrap;
+    white-space: nowrap; font-family: inherit;
   }
-  .btn-primary { background: var(--accent); color: var(--accent-fg); }
-  .btn-primary:hover { background: #002a9e; transform: translateY(-1px); }
-  .btn-ghost { background: transparent; color: var(--text); border-color: var(--line-2); }
-  .btn-ghost:hover { background: var(--bg-2); border-color: #404040; }
+  .btn-lg { padding: 16px 28px; font-size: 16px; }
+  .btn-primary {
+    background: linear-gradient(180deg, #2c54d4, #00176c);
+    color: white;
+    box-shadow:
+      0 1px 0 rgba(255,255,255,0.15) inset,
+      0 -8px 16px rgba(0,0,0,0.2) inset,
+      0 12px 40px rgba(0,23,108,0.55),
+      0 0 0 1px rgba(91,139,255,0.18);
+  }
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow:
+      0 1px 0 rgba(255,255,255,0.18) inset,
+      0 16px 48px rgba(0,23,108,0.7),
+      0 0 0 1px rgba(91,139,255,0.30);
+  }
+  .btn-primary:active { transform: scale(0.97); }
+  .btn-ghost {
+    background: rgba(255,255,255,0.04);
+    border-color: rgba(255,255,255,0.10);
+    color: var(--text);
+    backdrop-filter: blur(20px);
+  }
+  .btn-ghost:hover { background: rgba(255,255,255,0.08); border-color: rgba(91,139,255,0.30); }
   .btn-arrow { width: 16px; height: 16px; }
 
-  /* Navbar */
+  /* NAVBAR */
   header.nav {
     position: sticky; top: 0; z-index: 100;
-    background: rgba(10,10,10,0.7); backdrop-filter: blur(16px);
+    background: rgba(5,5,7,0.75);
+    backdrop-filter: blur(24px) saturate(150%);
     border-bottom: 1px solid var(--line);
   }
   .nav-row { display: flex; align-items: center; justify-content: space-between; padding: 18px 0; }
-  .logo { display: flex; align-items: center; gap: 10px; font-weight: 600; letter-spacing: -0.01em; font-size: 17px; text-decoration: none; color: var(--text); }
-  .logo-dot { width: 28px; height: 28px; display: inline-block; background-image: url('logo.png'); background-size: contain; background-repeat: no-repeat; background-position: center; }
+  .logo { display: flex; align-items: center; gap: 10px; font-weight: 700; letter-spacing: -0.02em; font-size: 17px; text-decoration: none; color: var(--text); }
+  .logo-dot {
+    width: 32px; height: 32px;
+    display: inline-block;
+    background-image: url('logo.png');
+    background-size: contain; background-repeat: no-repeat; background-position: center;
+    filter: drop-shadow(0 0 12px rgba(91,139,255,0.3));
+  }
   .nav-links { display: none; gap: 32px; }
   .nav-links a { color: var(--text-2); text-decoration: none; font-size: 14px; transition: color 0.15s; }
   .nav-links a:hover { color: var(--text); }
   @media (min-width: 900px) { .nav-links { display: flex; } }
   .nav-cta { display: flex; gap: 12px; align-items: center; }
 
-  /* Hero */
-  .hero { padding: 120px 0 80px; border-top: none; }
-  .hero h1 { max-width: 1100px; margin: 24px 0 0; }
-  .hero h1 .accent-text { color: var(--accent-bright); font-style: italic; font-weight: 400; }
-  .hero-sub { max-width: 640px; margin-top: 32px; font-size: 19px; color: var(--text-2); line-height: 1.55; }
-  .hero-cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 40px; }
-  .hero-meta { display: flex; flex-wrap: wrap; gap: 32px; margin-top: 64px; padding-top: 32px; border-top: 1px solid var(--line); }
-  .hero-meta-item { color: var(--text-2); font-size: 14px; }
-  .hero-meta-item strong { color: var(--text); display: block; font-size: 28px; font-weight: 500; margin-bottom: 4px; letter-spacing: -0.02em; }
+  /* HERO */
+  .hero { padding: 100px 0 80px; border-top: none; text-align: center; overflow: hidden; }
+  .hero-glow-top {
+    position: absolute; left: 50%; top: -200px; transform: translateX(-50%);
+    width: 1400px; height: 800px;
+    background: radial-gradient(ellipse at center top,
+      rgba(91,139,255,0.20) 0%,
+      rgba(0,23,108,0.30) 25%,
+      rgba(91,139,255,0.05) 50%,
+      transparent 70%);
+    pointer-events: none; z-index: 0;
+    filter: blur(40px);
+  }
+  .hero-content { position: relative; z-index: 3; max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+  .hero-eyebrow { margin-bottom: 32px; }
+  .hero h1 {
+    max-width: 1100px;
+    margin: 0 auto;
+    text-wrap: balance;
+  }
+  .hero h1 .word-shine {
+    background: linear-gradient(180deg, var(--accent-soft) 20%, var(--accent-bright) 60%, var(--accent-mid) 100%);
+    -webkit-background-clip: text; background-clip: text;
+    color: transparent; -webkit-text-fill-color: transparent;
+    font-family: 'Fraunces', Georgia, serif;
+    font-style: italic; font-weight: 400;
+  }
+  .hero h1 .word-block {
+    display: inline-block;
+    padding: 0 16px 8px;
+    background: linear-gradient(180deg, var(--accent-mid), var(--accent));
+    color: white;
+    border-radius: 20px;
+    box-shadow: 0 12px 40px rgba(0,23,108,0.55), 0 0 0 1px rgba(91,139,255,0.20);
+  }
+  .hero-sub {
+    max-width: 680px; margin: 32px auto 0;
+    font-size: clamp(16px, 1.5vw, 19px); color: var(--text-2); line-height: 1.6;
+  }
+  .hero-cta {
+    display: flex; flex-wrap: wrap; justify-content: center; gap: 14px;
+    margin-top: 44px;
+  }
+  .hero-meta {
+    display: flex; flex-wrap: wrap; justify-content: center; gap: 24px;
+    margin-top: 28px;
+    font-family: 'Geist Mono', monospace;
+    font-size: 12px; color: var(--text-3);
+    text-transform: uppercase; letter-spacing: 0.10em;
+  }
+  .hero-meta .check { color: var(--good); }
+  .hero-meta .sep { color: var(--line-2); }
 
-  /* Marquee */
+  /* HERO MOCKUP */
+  .hero-mockup-wrap {
+    margin-top: 88px;
+    padding: 0 24px;
+    position: relative;
+    perspective: 2000px;
+  }
+  .hero-mockup-wrap::before {
+    content: ''; position: absolute; left: 50%; bottom: -100px; transform: translateX(-50%);
+    width: 80%; height: 200px;
+    background: radial-gradient(ellipse at center,
+      rgba(91,139,255,0.20) 0%, transparent 70%);
+    filter: blur(40px); pointer-events: none;
+  }
+  .hero-mockup {
+    max-width: 1180px; margin: 0 auto;
+    background: linear-gradient(180deg, var(--surface), var(--bg-2));
+    border: 1px solid var(--line-2);
+    border-radius: 24px; padding: 12px;
+    box-shadow:
+      0 1px 0 rgba(255,255,255,0.06) inset,
+      0 40px 100px rgba(0,0,0,0.6),
+      0 0 0 1px rgba(91,139,255,0.06),
+      0 0 80px rgba(0,23,108,0.20);
+    position: relative;
+    transform: rotateX(2deg);
+    transform-origin: center top;
+  }
+  .hero-mockup::before {
+    content: ''; position: absolute; top: 0; left: 25%; right: 25%; height: 1px;
+    background: linear-gradient(to right, transparent, rgba(91,139,255,0.5), transparent);
+  }
+  .mockup-window { background: var(--bg); border-radius: 14px; overflow: hidden; border: 1px solid var(--line); }
+  .mockup-bar { background: var(--surface); padding: 12px 16px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid var(--line); }
+  .mockup-bar .d { width: 10px; height: 10px; border-radius: 50%; background: var(--line-2); }
+  .mockup-bar .addr { flex: 1; text-align: center; font-family: 'Geist Mono'; font-size: 11px; color: var(--text-3); }
+  .mockup-body { display: grid; grid-template-columns: 210px 1fr; min-height: 440px; }
+  @media (max-width: 700px) { .mockup-body { grid-template-columns: 1fr; } }
+  .mockup-sidebar { background: var(--bg-2); padding: 18px 14px; border-right: 1px solid var(--line); display: flex; flex-direction: column; gap: 4px; }
+  @media (max-width: 700px) { .mockup-sidebar { display: none; } }
+  .mockup-sidebar .brand { display: flex; align-items: center; gap: 10px; padding: 6px 8px; margin-bottom: 14px; }
+  .mockup-sidebar .brand-dot { width: 22px; height: 22px; background-image: url('logo.png'); background-size: contain; background-repeat: no-repeat; }
+  .mockup-sidebar .brand-name { font-size: 13px; font-weight: 700; }
+  .mockup-link { padding: 8px 10px; font-size: 12px; color: var(--text-3); border-radius: 8px; display: flex; align-items: center; gap: 8px; }
+  .mockup-link.active { background: rgba(91,139,255,0.10); color: var(--accent-bright); border: 1px solid rgba(91,139,255,0.18); }
+  .mockup-link .ic { width: 14px; height: 14px; opacity: 0.8; }
+  .mockup-main { padding: 20px; display: flex; flex-direction: column; gap: 14px; }
+  .mockup-head { display: flex; justify-content: space-between; align-items: center; }
+  .mockup-head .h-title { font-size: 14px; font-weight: 600; }
+  .mockup-head .h-stat { display: flex; gap: 8px; align-items: center; font-family: 'Geist Mono'; font-size: 11px; color: var(--good); }
+  .mockup-head .h-stat::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--good); box-shadow: 0 0 8px var(--good); }
+  .mockup-kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+  @media (max-width: 700px) { .mockup-kpis { grid-template-columns: repeat(2, 1fr); } }
+  .mockup-kpi { background: var(--bg-2); border: 1px solid var(--line); border-radius: 10px; padding: 12px; }
+  .mockup-kpi .lbl { font-size: 9px; color: var(--text-3); text-transform: uppercase; letter-spacing: 0.10em; font-family: 'Geist Mono'; margin-bottom: 6px; }
+  .mockup-kpi .val { font-family: 'Geist Mono'; font-size: 24px; font-weight: 500; font-variant-numeric: tabular-nums; }
+  .mockup-kpi.glow .val { color: var(--accent-bright); text-shadow: 0 0 16px rgba(91,139,255,0.6); }
+  .mockup-kpi .delta { font-size: 10px; font-family: 'Geist Mono'; color: var(--good); margin-top: 2px; }
+  .mockup-rows { display: flex; flex-direction: column; gap: 6px; }
+  .mockup-row { background: var(--bg-2); border: 1px solid var(--line); border-radius: 10px; padding: 10px 14px; display: flex; justify-content: space-between; align-items: center; font-size: 12px; }
+  .mockup-row .name { display: flex; gap: 10px; align-items: center; }
+  .mockup-row .av { width: 28px; height: 28px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; color: white; }
+  .av.blue { background: linear-gradient(135deg, var(--accent-mid), var(--accent)); }
+  .av.bright { background: linear-gradient(135deg, var(--accent-bright), var(--accent-mid)); }
+  .av.soft { background: linear-gradient(135deg, var(--accent-soft), var(--accent-bright)); color: var(--bg); }
+  .mockup-row .sub { color: var(--text-3); font-size: 10px; font-family: 'Geist Mono'; }
+  .mockup-row .time { color: var(--text-3); font-family: 'Geist Mono'; font-size: 11px; }
+  .mockup-row .badge {
+    font-family: 'Geist Mono'; font-size: 9px;
+    background: rgba(91,139,255,0.12); color: var(--accent-bright);
+    border: 1px solid rgba(91,139,255,0.22);
+    padding: 2px 8px; border-radius: 999px;
+    text-transform: uppercase; letter-spacing: 0.08em;
+  }
+
+  /* MARQUEE */
   .marquee {
-    overflow: hidden; padding: 32px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+    overflow: hidden; padding: 36px 0;
+    border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+    background: linear-gradient(180deg, transparent, rgba(91,139,255,0.02), transparent);
   }
   .marquee-track {
     display: inline-flex; align-items: center; gap: 80px; white-space: nowrap;
-    animation: marquee 40s linear infinite;
+    animation: marquee 50s linear infinite;
   }
   .marquee-item { color: var(--text-3); font-size: 22px; font-weight: 500; letter-spacing: -0.01em; }
   .marquee-item .accent-text { color: var(--text-2); }
-  .marquee-sep { color: #2a2a2a; }
-  @keyframes marquee {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
-  }
+  .marquee-sep { color: var(--line-2); font-size: 18px; }
+  @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
-  /* Section header */
-  .sec-head { display: grid; grid-template-columns: 1fr; gap: 24px; margin-bottom: 64px; }
+  /* SECTION HEAD */
+  .sec-head {
+    display: grid; grid-template-columns: 1fr; gap: 24px; margin-bottom: 80px;
+  }
   @media (min-width: 900px) {
     .sec-head { grid-template-columns: 1fr 1.5fr; gap: 80px; }
   }
-  .sec-head .sec-num { color: var(--text-3); font-family: 'Geist Mono', monospace; font-size: 13px; }
-
-  /* Services grid */
-  .services { display: grid; gap: 16px; grid-template-columns: 1fr; }
-  @media (min-width: 700px) { .services { grid-template-columns: 1fr 1fr; } }
-  .service {
-    border: 1px solid var(--line); border-radius: 20px; padding: 32px;
-    transition: border-color 0.2s, transform 0.2s; background: var(--bg-2);
-    display: flex; flex-direction: column; gap: 24px; min-height: 280px;
-  }
-  .service:hover { border-color: var(--line-2); }
-  .service .num { font-family: 'Geist Mono', monospace; font-size: 13px; color: var(--text-3); }
-  .service h3 { font-size: 26px; }
-  .service p { color: var(--text-2); font-size: 15px; line-height: 1.55; flex: 1; }
-  .service .ico {
-    width: 48px; height: 48px; border-radius: 12px; background: #1a1a1a;
-    display: inline-flex; align-items: center; justify-content: center;
-    border: 1px solid var(--line-2);
-    color: var(--accent-bright);
+  .sec-head .sec-meta {
+    display: flex; flex-direction: column; gap: 14px;
   }
 
-  /* Big-text section */
-  .big-text {
-    font-size: clamp(28px, 4vw, 56px); font-weight: 400; line-height: 1.1;
-    letter-spacing: -0.02em; max-width: 1200px;
+  /* STATS GIANT NUMBERS */
+  .stats-strip {
+    display: grid; gap: 0;
+    grid-template-columns: repeat(2, 1fr);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
   }
-  .big-text strong { font-weight: 600; }
-  .big-text .accent-text { color: var(--accent-bright); font-style: italic; font-weight: 400; }
-
-  /* Process steps */
-  .steps { display: grid; gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 20px; overflow: hidden; }
-  @media (min-width: 700px) { .steps { grid-template-columns: 1fr 1fr; } }
-  @media (min-width: 1024px) { .steps { grid-template-columns: 1fr 1fr 1fr 1fr; } }
-  .step { background: var(--bg); padding: 32px; min-height: 240px; display: flex; flex-direction: column; gap: 16px; }
-  .step .step-num { font-family: 'Geist Mono', monospace; font-size: 12px; color: var(--accent-bright); }
-  .step h4 { font-size: 22px; font-weight: 500; letter-spacing: -0.02em; }
-  .step p { color: var(--text-2); font-size: 14px; line-height: 1.55; }
-
-  /* Stats row */
-  .stats { display: grid; gap: 24px; grid-template-columns: 1fr 1fr; padding: 48px 0; }
-  @media (min-width: 900px) { .stats { grid-template-columns: 1fr 1fr 1fr 1fr; } }
-  .stat .num { font-size: clamp(48px, 5vw, 72px); font-weight: 500; letter-spacing: -0.03em; line-height: 1; }
-  .stat .num .unit { color: var(--accent-bright); }
-  .stat .lbl { color: var(--text-2); font-size: 14px; margin-top: 12px; line-height: 1.4; }
-
-  /* Pricing */
-  .pricing-grid { display: grid; gap: 16px; grid-template-columns: 1fr; }
-  @media (min-width: 900px) { .pricing-grid { grid-template-columns: 1fr 1fr 1fr; } }
-  .price-card {
-    border: 1px solid var(--line); border-radius: 20px; padding: 32px;
-    background: var(--bg-2); display: flex; flex-direction: column; gap: 20px;
+  @media (min-width: 900px) { .stats-strip { grid-template-columns: repeat(4, 1fr); } }
+  .stat-cell {
+    padding: 48px 32px;
+    border-right: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
     position: relative;
   }
-  .price-card.featured {
-    background: var(--accent); color: var(--accent-fg); border-color: var(--accent);
+  @media (min-width: 900px) {
+    .stat-cell { border-bottom: none; }
+    .stat-cell:last-child { border-right: none; }
   }
-  .price-card.featured .price-line, .price-card.featured .price-foot { color: rgba(10,10,10,0.7); }
-  .price-card.featured .feat li { color: var(--accent-fg); }
-  .price-tag { font-family: 'Geist Mono', monospace; font-size: 12px; color: var(--text-3); text-transform: uppercase; letter-spacing: 0.05em; }
-  .price-card.featured .price-tag { color: rgba(10,10,10,0.6); }
-  .price-card h3 { font-size: 28px; }
-  .price-amount { display: flex; align-items: baseline; gap: 8px; padding: 16px 0; border-top: 1px solid var(--line-2); border-bottom: 1px solid var(--line-2); }
-  .price-card.featured .price-amount { border-color: rgba(10,10,10,0.18); }
-  .price-amount .big { font-size: 56px; font-weight: 500; letter-spacing: -0.03em; line-height: 1; }
-  .price-amount .small { font-size: 14px; color: var(--text-2); }
-  .price-card.featured .price-amount .small { color: rgba(10,10,10,0.7); }
-  .price-line { font-size: 13px; color: var(--text-2); }
-  .feat { list-style: none; display: flex; flex-direction: column; gap: 10px; font-size: 14px; flex: 1; }
-  .feat li { display: flex; gap: 10px; color: var(--text-2); }
-  .feat li::before { content: '+'; color: var(--accent-bright); font-weight: 600; }
-  .price-card.featured .feat li::before { color: var(--accent-fg); }
-  .price-foot { font-size: 12px; color: var(--text-3); }
+  @media (max-width: 899px) {
+    .stat-cell:nth-child(2n) { border-right: none; }
+  }
+  .stat-cell .lbl {
+    font-family: 'Geist Mono'; font-size: 11px;
+    color: var(--text-3); text-transform: uppercase;
+    letter-spacing: 0.20em; margin-bottom: 16px;
+  }
+  .stat-cell .val {
+    font-size: clamp(48px, 6vw, 84px);
+    font-weight: 600; letter-spacing: -0.04em; line-height: 1;
+    font-variant-numeric: tabular-nums;
+    background: linear-gradient(180deg, var(--text) 30%, var(--accent-bright) 100%);
+    -webkit-background-clip: text; background-clip: text;
+    color: transparent;
+  }
+  .stat-cell .val .unit { color: var(--accent-bright); -webkit-text-fill-color: var(--accent-bright); }
+  .stat-cell .desc { color: var(--text-3); font-size: 13px; margin-top: 12px; line-height: 1.5; }
 
-  /* FAQ */
-  .faq { max-width: 880px; margin: 0 auto; display: flex; flex-direction: column; gap: 0; }
-  details.q {
-    border-top: 1px solid var(--line); padding: 24px 0; cursor: pointer;
+  /* BENTO FEATURES */
+  .bento {
+    display: grid; gap: 16px;
+    grid-template-columns: 1fr;
   }
-  details.q:last-child { border-bottom: 1px solid var(--line); }
-  details.q summary { display: flex; justify-content: space-between; align-items: center; gap: 24px; list-style: none; font-size: 19px; font-weight: 500; letter-spacing: -0.01em; }
-  details.q summary::-webkit-details-marker { display: none; }
-  details.q .plus {
-    width: 28px; height: 28px; border: 1px solid var(--line-2); border-radius: 50%;
+  @media (min-width: 700px) { .bento { grid-template-columns: 1fr 1fr; } }
+  @media (min-width: 1024px) {
+    .bento {
+      grid-template-columns: repeat(6, 1fr);
+      grid-auto-rows: minmax(240px, auto);
+    }
+  }
+  .b-card {
+    position: relative; overflow: hidden;
+    background: linear-gradient(180deg, var(--surface), var(--bg-2));
+    border: 1px solid var(--line);
+    border-radius: 24px;
+    padding: 32px;
+    transition: all 0.3s;
+    display: flex; flex-direction: column;
+  }
+  .b-card::before {
+    content: ''; position: absolute; top: 0; left: 24px; right: 24px; height: 1px;
+    background: linear-gradient(to right, transparent, rgba(91,139,255,0.20), transparent);
+  }
+  .b-card:hover {
+    border-color: rgba(91,139,255,0.25);
+    transform: translateY(-3px);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 60px rgba(91,139,255,0.10);
+  }
+  @media (min-width: 1024px) {
+    .b-3 { grid-column: span 3; }
+    .b-2 { grid-column: span 2; }
+    .b-4 { grid-column: span 4; }
+    .b-tall { grid-row: span 2; }
+  }
+  .b-card .b-num {
+    font-family: 'Geist Mono'; font-size: 11px;
+    color: var(--text-3); text-transform: uppercase;
+    letter-spacing: 0.20em; margin-bottom: 16px;
+  }
+  .b-card .ic {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: rgba(91,139,255,0.08);
+    border: 1px solid rgba(91,139,255,0.18);
     display: inline-flex; align-items: center; justify-content: center;
-    flex-shrink: 0; transition: transform 0.2s, background 0.2s;
+    margin-bottom: 24px;
+    color: var(--accent-bright);
   }
-  details.q[open] .plus { transform: rotate(45deg); background: var(--accent); color: var(--accent-fg); border-color: var(--accent); }
-  details.q .ans { color: var(--text-2); margin-top: 16px; font-size: 15px; line-height: 1.6; max-width: 720px; }
-
-  /* CTA */
-  .cta-box {
-    border: 1px solid var(--line); border-radius: 24px; padding: 64px 32px;
-    text-align: center; background: var(--bg-2);
+  .b-card .ic svg { width: 20px; height: 20px; }
+  .b-card h3 { margin-bottom: 12px; font-size: 22px; font-weight: 600; }
+  .b-card h3 .ital { font-family: 'Fraunces'; font-style: italic; font-weight: 400; color: var(--accent-bright); }
+  .b-card p { color: var(--text-2); font-size: 14px; line-height: 1.6; }
+  .b-card.b-feature {
+    background:
+      radial-gradient(ellipse at top right, rgba(0,23,108,0.30), transparent 50%),
+      linear-gradient(180deg, var(--surface), var(--bg-2));
+    border-color: rgba(91,139,255,0.20);
   }
-  .cta-box h2 { max-width: 720px; margin: 0 auto; }
-  .cta-box .sub { color: var(--text-2); margin: 24px auto 32px; max-width: 540px; font-size: 17px; }
-  .cta-box .btns { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
-
-  /* Testimonial */
-  .testimonial {
-    border: 1px solid var(--line); border-radius: 24px; padding: 48px;
-    background: var(--bg-2);
+  .b-card .corner-glow {
+    position: absolute; top: -30px; right: -30px;
+    width: 220px; height: 220px;
+    background: radial-gradient(circle, rgba(91,139,255,0.18), transparent 60%);
+    pointer-events: none; filter: blur(20px);
   }
-  .quote-mark { font-family: serif; font-size: 80px; line-height: 0.5; color: var(--accent-bright); height: 32px; }
-  .quote-text { font-size: clamp(20px, 2.5vw, 32px); font-weight: 400; line-height: 1.35; letter-spacing: -0.01em; margin: 24px 0 32px; max-width: 920px; }
-  .quote-meta { display: flex; align-items: center; gap: 16px; }
-  .quote-avatar { width: 48px; height: 48px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), var(--accent-bright)); color: var(--accent-fg); font-weight: 700; display: inline-flex; align-items: center; justify-content: center; }
-  .quote-name { font-weight: 500; }
-  .quote-role { color: var(--text-3); font-size: 13px; }
 
-  /* Compare table */
+  /* Mock dental chart */
+  .mock-chart {
+    margin-top: 20px; padding: 14px;
+    background: var(--bg-2); border: 1px solid var(--line);
+    border-radius: 12px;
+    display: grid; grid-template-columns: repeat(8, 1fr); gap: 4px;
+    position: relative; z-index: 1;
+  }
+  .tooth {
+    aspect-ratio: 1; border-radius: 4px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+  .tooth.t-blue { background: rgba(91,139,255,0.30); border-color: var(--accent-bright); box-shadow: 0 0 8px rgba(91,139,255,0.4); }
+  .tooth.t-bright { background: rgba(185,200,255,0.20); border-color: var(--accent-soft); }
+  .tooth.t-warn { background: rgba(251,191,36,0.22); border-color: var(--warn); }
+  .tooth.t-bad { background: rgba(248,113,113,0.20); border-color: var(--bad); }
+  .legend {
+    margin-top: 12px; font-family: 'Geist Mono'; font-size: 10px;
+    color: var(--text-3); display: flex; flex-wrap: wrap; gap: 14px;
+  }
+  .legend span { display: inline-flex; align-items: center; gap: 6px; }
+  .legend .d { width: 8px; height: 8px; border-radius: 2px; }
+
+  /* Mock receipt */
+  .mock-receipt {
+    margin-top: 18px; padding: 14px;
+    background: var(--bg-2); border: 1px solid var(--line); border-radius: 12px;
+    font-family: 'Geist Mono'; font-size: 11px;
+    position: relative; z-index: 1;
+  }
+  .mock-receipt .r { display: flex; justify-content: space-between; padding: 4px 0; color: var(--text-2); }
+  .mock-receipt .r.t { border-top: 1px dashed var(--line-2); margin-top: 8px; padding-top: 8px; color: var(--text); font-weight: 700; }
+  .mock-receipt .r .pos { color: var(--accent-bright); }
+
+  /* Mock bar chart */
+  .mock-bars {
+    margin-top: 20px; padding: 14px;
+    background: var(--bg-2); border: 1px solid var(--line); border-radius: 12px;
+    display: flex; align-items: flex-end; gap: 6px; height: 110px;
+    position: relative; z-index: 1;
+  }
+  .mock-bars .bar {
+    flex: 1; background: linear-gradient(180deg, var(--accent-bright), rgba(91,139,255,0.2));
+    border-radius: 3px;
+  }
+  .mock-bars .bar.peak { background: linear-gradient(180deg, var(--accent-soft), rgba(185,200,255,0.3)); box-shadow: 0 0 12px var(--accent-bright); }
+
+  /* JULIA SECTION */
+  .julia-hero {
+    text-align: center; max-width: 880px; margin: 0 auto 64px;
+  }
+  .julia-orb {
+    width: 88px; height: 88px; border-radius: 50%;
+    margin: 0 auto 32px;
+    background: radial-gradient(circle at 30% 30%, var(--accent-soft), var(--accent-bright) 40%, var(--accent) 100%);
+    box-shadow:
+      0 0 60px rgba(91,139,255,0.5),
+      0 0 120px rgba(0,23,108,0.4),
+      inset 0 -10px 20px rgba(0,0,0,0.3);
+    position: relative;
+    animation: orb-spin 6s ease-in-out infinite alternate;
+  }
+  .julia-orb::before {
+    content: ''; position: absolute; inset: 12px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, white, transparent 50%);
+    opacity: 0.5;
+  }
+  @keyframes orb-spin {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.05); }
+  }
+  .julia-hero h2 {
+    font-size: clamp(40px, 6vw, 80px);
+    font-weight: 600; letter-spacing: -0.035em; line-height: 1;
+    margin-bottom: 24px;
+  }
+  .julia-hero h2 .ital {
+    font-family: 'Fraunces', Georgia, serif;
+    font-style: italic; font-weight: 400;
+    background: linear-gradient(180deg, var(--accent-soft), var(--accent-bright));
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .julia-hero p {
+    color: var(--text-2); font-size: 18px; line-height: 1.6;
+    max-width: 600px; margin: 0 auto;
+  }
+  .julia-hero p strong { color: var(--accent-bright); font-weight: 500; }
+
+  .mock-chat-big { max-width: 720px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px; }
+  .mock-bubble {
+    padding: 12px 16px; border-radius: 18px;
+    max-width: 80%; font-size: 13px; line-height: 1.6;
+  }
+  .mock-bubble.user {
+    background: linear-gradient(180deg, var(--accent-mid), var(--accent));
+    color: white; align-self: flex-end;
+    border-bottom-right-radius: 4px;
+    box-shadow: 0 8px 24px rgba(0,23,108,0.45);
+  }
+  .mock-bubble.ai {
+    background: var(--surface);
+    border: 1px solid var(--line-2);
+    color: var(--text-2); align-self: flex-start;
+    border-bottom-left-radius: 4px;
+    backdrop-filter: blur(20px);
+  }
+  .mock-bubble.ai .tag {
+    font-family: 'Geist Mono'; font-size: 9px;
+    color: var(--accent-bright); text-transform: uppercase; letter-spacing: 0.15em;
+    margin-bottom: 6px; display: block;
+  }
+  .mock-bubble.ai strong { color: var(--accent-soft); }
+
+  .julia-tiles {
+    display: grid; gap: 12px;
+    grid-template-columns: 1fr;
+    margin-top: 64px;
+  }
+  @media (min-width: 700px) { .julia-tiles { grid-template-columns: 1fr 1fr; } }
+  @media (min-width: 1024px) { .julia-tiles { grid-template-columns: repeat(4, 1fr); } }
+  .julia-tile {
+    background: linear-gradient(180deg, var(--surface), var(--bg-2));
+    border: 1px solid var(--line);
+    border-radius: 16px; padding: 24px;
+    transition: all 0.3s;
+  }
+  .julia-tile:hover { border-color: rgba(91,139,255,0.25); transform: translateY(-2px); }
+  .julia-tile .l {
+    font-family: 'Geist Mono'; font-size: 10px;
+    color: var(--accent-bright); text-transform: uppercase;
+    letter-spacing: 0.20em; margin-bottom: 16px;
+  }
+  .julia-tile h4 { font-size: 18px; font-weight: 600; margin-bottom: 8px; }
+  .julia-tile p { color: var(--text-2); font-size: 13px; line-height: 1.6; }
+
+  /* PROCESS */
+  .process-list { display: flex; flex-direction: column; gap: 0; }
+  .process-row {
+    display: grid; grid-template-columns: 1fr;
+    border-top: 1px solid var(--line);
+    padding: 48px 0;
+    gap: 24px;
+    align-items: start;
+    transition: background 0.3s;
+  }
+  @media (min-width: 900px) { .process-row { grid-template-columns: 180px 1fr 1fr; gap: 64px; } }
+  .process-row:last-child { border-bottom: 1px solid var(--line); }
+  .process-row:hover { background: rgba(91,139,255,0.025); }
+  .process-num {
+    font-size: clamp(64px, 8vw, 120px);
+    font-weight: 600; letter-spacing: -0.05em; line-height: 0.85;
+    color: transparent;
+    -webkit-text-stroke: 1px var(--line-2);
+    transition: all 0.3s;
+  }
+  .process-row:hover .process-num {
+    -webkit-text-stroke: 1px transparent;
+    background: linear-gradient(180deg, var(--accent-soft), var(--accent-bright));
+    -webkit-background-clip: text; background-clip: text;
+    text-shadow: 0 0 60px rgba(91,139,255,0.4);
+  }
+  .process-info .p-tag {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 4px 12px;
+    background: rgba(91,139,255,0.06);
+    border: 1px solid rgba(91,139,255,0.18);
+    border-radius: 999px;
+    font-family: 'Geist Mono'; font-size: 11px;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--accent-bright); margin-bottom: 18px;
+  }
+  .process-info h4 { font-size: clamp(24px, 3vw, 34px); font-weight: 600; letter-spacing: -0.02em; line-height: 1.1; }
+  .process-desc { color: var(--text-2); font-size: 15px; line-height: 1.7; }
+
+  /* TESTIMONIAL */
+  .testimonial-wrap {
+    position: relative; max-width: 1100px; margin: 0 auto;
+    padding-left: clamp(60px, 9vw, 140px);
+  }
+  .testimonial-wrap::before {
+    content: '"'; position: absolute; left: 0; top: -40px;
+    font-family: 'Fraunces'; font-style: italic; font-weight: 300;
+    font-size: clamp(180px, 18vw, 320px); line-height: 1;
+    letter-spacing: -0.05em;
+    background: linear-gradient(180deg, var(--accent-soft), var(--accent-mid));
+    -webkit-background-clip: text; background-clip: text;
+    color: transparent;
+    text-shadow: 0 0 100px rgba(91,139,255,0.4);
+  }
+  .testimonial-tag {
+    font-family: 'Geist Mono'; font-size: 11px;
+    color: var(--accent-bright); text-transform: uppercase;
+    letter-spacing: 0.25em; margin-bottom: 32px;
+    display: inline-flex; align-items: center; gap: 12px;
+  }
+  .testimonial-tag::after {
+    content: ''; flex: 1; max-width: 200px; height: 1px;
+    background: linear-gradient(to right, rgba(91,139,255,0.3), transparent);
+  }
+  .testimonial-quote {
+    font-size: clamp(26px, 3.5vw, 44px);
+    font-weight: 500; letter-spacing: -0.02em; line-height: 1.25;
+    margin-bottom: 40px;
+  }
+  .testimonial-quote .pop {
+    background: linear-gradient(180deg, var(--accent-soft), var(--accent-bright));
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-family: 'Fraunces'; font-style: italic; font-weight: 400;
+  }
+  .testimonial-author { display: flex; align-items: center; gap: 16px; }
+  .testimonial-author .av {
+    width: 56px; height: 56px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent-bright), var(--accent));
+    color: white; display: inline-flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 17px;
+    box-shadow: 0 8px 24px rgba(0,23,108,0.5), 0 0 0 1px rgba(91,139,255,0.20);
+  }
+  .testimonial-author .n { font-weight: 600; font-size: 16px; }
+  .testimonial-author .r {
+    font-family: 'Geist Mono'; font-size: 11px; color: var(--text-3);
+    text-transform: uppercase; letter-spacing: 0.10em; margin-top: 4px;
+  }
+
+  /* COMPARE */
   .compare {
-    border: 1px solid var(--line); border-radius: 20px; overflow: hidden; background: var(--bg-2);
+    border: 1px solid var(--line);
+    border-radius: 24px; overflow: hidden;
+    background: linear-gradient(180deg, var(--surface), var(--bg-2));
   }
   .compare table { width: 100%; border-collapse: collapse; font-size: 15px; }
-  .compare th { text-align: left; padding: 20px 24px; color: var(--text-3); font-weight: 500; font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em; border-bottom: 1px solid var(--line); }
-  .compare td { padding: 16px 24px; border-bottom: 1px solid var(--line); }
+  .compare th {
+    text-align: left; padding: 24px;
+    color: var(--text-3); font-weight: 500;
+    font-family: 'Geist Mono'; font-size: 12px;
+    text-transform: uppercase; letter-spacing: 0.15em;
+    border-bottom: 1px solid var(--line);
+  }
+  .compare td { padding: 18px 24px; border-bottom: 1px solid var(--line); color: var(--text-2); }
   .compare tr:last-child td { border-bottom: none; }
-  .compare td.feat-name { font-weight: 500; }
-  .compare td.cs-col { background: rgba(91, 139, 255, 0.05); color: var(--text); border-left: 1px solid rgba(91,139,255,0.25); border-right: 1px solid rgba(91,139,255,0.25); }
-  .compare tr:last-child td.cs-col { border-bottom: 1px solid rgba(91,139,255,0.25); }
-  .compare th.cs-col { background: rgba(91,139,255,0.08); color: var(--accent-bright); border-left: 1px solid rgba(91,139,255,0.25); border-right: 1px solid rgba(91,139,255,0.25); border-top: 1px solid rgba(91,139,255,0.25); }
-  .check { color: var(--accent-bright); }
+  .compare td.feat-name { font-weight: 500; color: var(--text); }
+  .compare td.cs-col {
+    background:
+      linear-gradient(180deg, rgba(91,139,255,0.06), rgba(91,139,255,0.02)),
+      var(--surface);
+    color: var(--text);
+    border-left: 1px solid rgba(91,139,255,0.30);
+    border-right: 1px solid rgba(91,139,255,0.30);
+  }
+  .compare tr:last-child td.cs-col { border-bottom: 1px solid rgba(91,139,255,0.30); }
+  .compare th.cs-col {
+    background: rgba(91,139,255,0.10);
+    color: var(--accent-bright);
+    border-left: 1px solid rgba(91,139,255,0.30);
+    border-right: 1px solid rgba(91,139,255,0.30);
+    border-top: 1px solid rgba(91,139,255,0.30);
+  }
+  .check { color: var(--accent-bright); font-weight: 700; }
 
-  /* Footer */
-  footer.foot { padding: 64px 0 32px; border-top: 1px solid var(--line); }
-  .foot-row { display: grid; grid-template-columns: 1fr; gap: 48px; margin-bottom: 64px; }
+  /* FAQ */
+  .faq { max-width: 920px; margin: 0 auto; display: flex; flex-direction: column; gap: 0; }
+  details.q {
+    border-top: 1px solid var(--line); padding: 28px 0;
+    transition: all 0.2s;
+  }
+  details.q:last-child { border-bottom: 1px solid var(--line); }
+  details.q summary {
+    list-style: none; cursor: pointer;
+    display: flex; justify-content: space-between; align-items: center;
+    gap: 24px;
+    font-size: 19px; font-weight: 500; letter-spacing: -0.01em;
+  }
+  details.q summary::-webkit-details-marker { display: none; }
+  details.q .plus {
+    width: 36px; height: 36px;
+    border: 1px solid var(--line-2); border-radius: 50%;
+    display: inline-flex; align-items: center; justify-content: center;
+    flex-shrink: 0; transition: all 0.25s;
+    font-family: 'Geist Mono'; font-size: 16px;
+  }
+  details.q[open] .plus {
+    background: linear-gradient(180deg, var(--accent-mid), var(--accent));
+    color: white;
+    border-color: transparent;
+    transform: rotate(45deg);
+    box-shadow: 0 4px 16px rgba(0,23,108,0.5);
+  }
+  details.q[open] summary { color: var(--accent-bright); }
+  details.q .ans { color: var(--text-2); margin-top: 18px; font-size: 15px; line-height: 1.7; max-width: 760px; }
+
+  /* CTA */
+  .cta-section { padding: 140px 0; position: relative; overflow: hidden; }
+  .cta-bloom {
+    position: absolute; left: 50%; bottom: -250px; transform: translateX(-50%);
+    width: 1200px; height: 700px;
+    background: radial-gradient(ellipse at center top,
+      rgba(91,139,255,0.25) 0%, rgba(0,23,108,0.35) 25%,
+      rgba(91,139,255,0.06) 50%, transparent 70%);
+    pointer-events: none; filter: blur(40px); z-index: 0;
+  }
+  .cta-box {
+    text-align: center; position: relative; z-index: 2;
+    max-width: 880px; margin: 0 auto; padding: 0 24px;
+  }
+  .cta-box h2 { margin-bottom: 24px; }
+  .cta-box h2 .ital {
+    font-family: 'Fraunces', Georgia, serif;
+    font-style: italic; font-weight: 400;
+    background: linear-gradient(180deg, var(--accent-soft), var(--accent-bright));
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .cta-box p { color: var(--text-2); max-width: 520px; margin: 0 auto 36px; font-size: 17px; line-height: 1.6; }
+  .cta-btns { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; }
+  .cta-meta {
+    margin-top: 32px;
+    font-family: 'Geist Mono'; font-size: 12px;
+    color: var(--text-3); text-transform: uppercase; letter-spacing: 0.10em;
+    display: flex; flex-wrap: wrap; justify-content: center; gap: 16px;
+  }
+  .cta-meta .sep { color: var(--line-2); }
+
+  /* FOOTER */
+  footer.foot { padding: 80px 0 32px; border-top: 1px solid var(--line); position: relative; }
+  .foot-row { display: grid; grid-template-columns: 1fr; gap: 48px; margin-bottom: 56px; }
   @media (min-width: 700px) { .foot-row { grid-template-columns: 2fr 1fr 1fr 1fr; } }
-  .foot h5 { font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-3); margin-bottom: 16px; font-weight: 500; }
+  .foot h5 {
+    font-family: 'Geist Mono'; font-size: 11px;
+    text-transform: uppercase; letter-spacing: 0.25em;
+    color: var(--text-3); margin-bottom: 18px;
+  }
   .foot ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-  .foot ul a { color: var(--text-2); text-decoration: none; font-size: 14px; }
-  .foot ul a:hover { color: var(--text); }
-  .foot-bottom { display: flex; flex-wrap: wrap; gap: 24px; justify-content: space-between; padding-top: 32px; border-top: 1px solid var(--line); color: var(--text-3); font-size: 13px; }
+  .foot ul a { color: var(--text-2); text-decoration: none; font-size: 14px; transition: color 0.2s; }
+  .foot ul a:hover { color: var(--accent-bright); }
+  .foot-bottom {
+    display: flex; flex-wrap: wrap; gap: 24px; justify-content: space-between;
+    padding-top: 28px; border-top: 1px solid var(--line);
+    color: var(--text-3); font-size: 12px;
+    font-family: 'Geist Mono'; text-transform: uppercase; letter-spacing: 0.10em;
+  }
+  .foot-wordmark {
+    font-family: 'Fraunces'; font-style: italic; font-weight: 400;
+    font-size: clamp(96px, 22vw, 320px); font-weight: 300;
+    letter-spacing: -0.05em; line-height: 0.85;
+    background: linear-gradient(180deg, rgba(91,139,255,0.30), rgba(0,23,108,0.10));
+    -webkit-background-clip: text; background-clip: text;
+    color: transparent;
+    margin: 56px 0 32px; user-select: none;
+    text-align: center;
+  }
 
   /* Reveal */
-  [data-reveal] { opacity: 0; transform: translateY(16px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
+  [data-reveal] { opacity: 0; transform: translateY(20px); transition: opacity 0.8s, transform 0.8s; }
   [data-reveal].in { opacity: 1; transform: translateY(0); }
-
-  /* Big footer wordmark */
-  .foot-wordmark {
-    font-size: clamp(80px, 18vw, 240px); font-weight: 600; letter-spacing: -0.05em; line-height: 0.85;
-    color: transparent; -webkit-text-stroke: 1px var(--line-2);
-    margin: 64px 0 32px; user-select: none;
-  }
 </style>
 </head>
 <body>
 
-<!-- ======== NAV ======== -->
+<!-- ============ NAV ============ -->
 <header class="nav">
   <div class="wrap nav-row">
     <a href="#" class="logo">
@@ -269,284 +779,417 @@
       <span>ClinicService</span>
     </a>
     <nav class="nav-links">
-      <a href="#services">Fonctionnalités</a>
-      <a href="#julia">IA Julia</a>
+      <a href="#features">Fonctionnalités</a>
+      <a href="#julia">Julia AI</a>
       <a href="#process">Démarrage</a>
       <a href="#faq">FAQ</a>
     </nav>
     <div class="nav-cta">
-      <a href="#contact" class="btn btn-primary">Démo gratuite
+      <a href="#contact" class="btn btn-primary">
+        Démo gratuite
         <svg class="btn-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
       </a>
     </div>
   </div>
 </header>
 
-<!-- ======== HERO ======== -->
+<!-- ============ HERO ============ -->
 <section class="hero">
-  <div class="wrap">
-    <div class="eyebrow"><span class="dot"></span> Logiciel de gestion clinique</div>
+  <div class="hero-glow-top"></div>
+  <div class="hero-content">
+    <div class="eyebrow hero-eyebrow"><span class="dot"></span> En direct · 6 cliniques pilotes en Algérie</div>
     <h1>
-      Pilotez votre clinique <span class="accent-text">en temps réel.</span>
+      Le système d'<span class="word-shine">exploitation</span><br/>
+      des cliniques <span class="word-block">dentaires.</span>
     </h1>
     <p class="hero-sub">
-      ClinicService est la plateforme tout-en-un qui digitalise votre flux patient — de l'accueil à la caisse, en passant par le dossier clinique, l'imagerie DICOM et la comptabilité. Conçue en Algérie, pour les cliniques algériennes.
+      ClinicService digitalise votre flux patient — dossier clinique, agenda multi-praticiens, caisse temps réel, imagerie DICOM intégrée. Conçu en Algérie. Augmenté par Julia, votre IA dédiée.
     </p>
     <div class="hero-cta">
-      <a href="#contact" class="btn btn-primary">Demander une démo
+      <a href="#contact" class="btn btn-lg btn-primary">
+        Demander une démo
         <svg class="btn-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
       </a>
-      <a href="#services" class="btn btn-ghost">Voir les fonctionnalités</a>
+      <a href="#features" class="btn btn-lg btn-ghost">Voir les fonctionnalités</a>
     </div>
     <div class="hero-meta">
-      <div class="hero-meta-item"><strong>6 500+</strong>patients gérés activement</div>
-      <div class="hero-meta-item"><strong>24</strong>boxes par site</div>
-      <div class="hero-meta-item"><strong>80+</strong>membres d'équipe connectés</div>
-      <div class="hero-meta-item"><strong>3</strong>langues — FR · AR · EN</div>
+      <span><span class="check">✓</span> Essai gratuit 30 jours</span>
+      <span class="sep">·</span>
+      <span><span class="check">✓</span> Installation en 24 h</span>
+      <span class="sep">·</span>
+      <span><span class="check">✓</span> Formation incluse</span>
     </div>
   </div>
-</section>
 
-<!-- ======== MARQUEE ======== -->
-<div class="marquee" aria-hidden="true">
-  <div class="marquee-track">
-    <span class="marquee-item">ZEKRI <span class="accent-text">Dental</span></span>
-    <span class="marquee-sep">/</span>
-    <span class="marquee-item">Clinique Atlas</span>
-    <span class="marquee-sep">/</span>
-    <span class="marquee-item">SmileCare</span>
-    <span class="marquee-sep">/</span>
-    <span class="marquee-item">DentaPlus<sup>+</sup></span>
-    <span class="marquee-sep">/</span>
-    <span class="marquee-item">Cabinet Mansouri</span>
-    <span class="marquee-sep">/</span>
-    <span class="marquee-item">OrthoDZ</span>
-    <span class="marquee-sep">/</span>
-    <!-- duplicated for seamless loop -->
-    <span class="marquee-item">ZEKRI <span class="accent-text">Dental</span></span>
-    <span class="marquee-sep">/</span>
-    <span class="marquee-item">Clinique Atlas</span>
-    <span class="marquee-sep">/</span>
-    <span class="marquee-item">SmileCare</span>
-    <span class="marquee-sep">/</span>
-    <span class="marquee-item">DentaPlus<sup>+</sup></span>
-    <span class="marquee-sep">/</span>
-    <span class="marquee-item">Cabinet Mansouri</span>
-    <span class="marquee-sep">/</span>
-    <span class="marquee-item">OrthoDZ</span>
-    <span class="marquee-sep">/</span>
-  </div>
-</div>
-
-<!-- ======== SERVICES ======== -->
-<section id="services">
-  <div class="wrap">
-    <div class="sec-head" data-reveal>
-      <div>
-        <div class="eyebrow"><span class="dot"></span> 01 — Fonctionnalités</div>
-      </div>
-      <div>
-        <h2>Tout ce dont votre clinique a besoin. <span style="color: var(--text-3);">Sans rien d'inutile.</span></h2>
-      </div>
-    </div>
-
-    <div class="services">
-      <article class="service" data-reveal>
-        <div class="num mono">01</div>
-        <span class="ico">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5.5c-2.5 0-3.5 1-5 1s-3-.5-3 2c0 4 2.5 11 4.5 11 .8 0 1-1 1.5-2.5s.7-3 2-3 1.5 1.5 2 3 .7 2.5 1.5 2.5c2 0 4.5-7 4.5-11 0-2.5-1.5-2-3-2s-2.5-1-5-1Z"/></svg>
-        </span>
-        <h3>Dossier patient & dentaire</h3>
-        <p>Fiche médicale complète, schéma 32 dents (FDIS) interactif, plan de traitement, photos illimitées, signatures électroniques, viewer 3D pour les modèles labo.</p>
-      </article>
-
-      <article class="service" data-reveal>
-        <div class="num mono">02</div>
-        <span class="ico">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
-        </span>
-        <h3>Agenda & boxes</h3>
-        <p>Calendrier multi-praticiens avec glisser-déposer, créneaux 15 min, partage entre staff, sync Google Calendar. Affectation automatique des patients aux boxes.</p>
-      </article>
-
-      <article class="service" data-reveal>
-        <div class="num mono">03</div>
-        <span class="ico">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 6h20v12H2zM12 12h.01"/><path d="M6 12h.01M18 12h.01"/></svg>
-        </span>
-        <h3>Caisse multi-postes</h3>
-        <p>Pensée comme un POS de restaurant. File d'attente intelligente, gestion des remises, splits commission auto, multi-paiement (CIB, Edahabia, espèces, CCP).</p>
-      </article>
-
-      <article class="service" data-reveal>
-        <div class="num mono">04</div>
-        <span class="ico">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg>
-        </span>
-        <h3>Imagerie DICOM</h3>
-        <p>Visualisation Pano, CBCT, rétro-alvéolaire directement dans le navigateur. Zoom, mesures, annotations, navigation entre séries. Pas besoin d'un autre logiciel.</p>
-      </article>
-
-      <article class="service" data-reveal>
-        <div class="num mono">05</div>
-        <span class="ico">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 3v18M18 3v18M3 6h18M3 12h18M3 18h18"/></svg>
-        </span>
-        <h3>Workflow visuel</h3>
-        <p>Modélisez le parcours patient en glisser-déposer. Départements, boxes, transitions conditionnelles. Chaque clinique unique, configuration sans code.</p>
-      </article>
-
-      <article class="service" data-reveal>
-        <div class="num mono">06</div>
-        <span class="ico">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><path d="M3.27 6.96 12 12.01l8.73-5.05M12 22.08V12"/></svg>
-        </span>
-        <h3>Stock & coffre-fort</h3>
-        <p>Suivi stock par lots, alertes péremption, bons de commande. Coffre financier sécurisé avec audit, dépôts/retraits, soldes temps réel.</p>
-      </article>
-    </div>
-  </div>
-</section>
-
-<!-- ======== JULIA AI BIG-TEXT ======== -->
-<section id="julia">
-  <div class="wrap">
-    <div class="sec-head" data-reveal>
-      <div>
-        <div class="eyebrow"><span class="dot"></span> 02 — Intelligence augmentée</div>
-      </div>
-      <div>
-        <h2>Rencontrez <span style="color: var(--accent-bright); font-style: italic; font-weight: 400;">Julia.</span></h2>
-      </div>
-    </div>
-
-    <p class="big-text" data-reveal>
-      Julia n'est pas un chatbot. C'est <strong>une assistante IA intégrée</strong> qui apprend votre clinique, détecte les anomalies, suggère des actions, et exécute les tâches répétitives. Toutes les <span class="accent-text">5 minutes</span>, elle scanne vos données : box inactives, stock bas, RDV non confirmés, paiements en retard. Vous êtes alerté avant que ça devienne un problème.
-    </p>
-
-    <div class="services" style="margin-top: 80px;">
-      <article class="service" data-reveal>
-        <div class="num mono">— Mémoire</div>
-        <h3>Elle apprend votre clinique</h3>
-        <p>3 niveaux de mémoire : session, utilisateur, clinique entière. Julia retient vos préférences, vos protocoles, et le profil de chaque patient. Elle s'améliore chaque jour.</p>
-      </article>
-      <article class="service" data-reveal>
-        <div class="num mono">— Voix</div>
-        <h3>Parlez en darija</h3>
-        <p>Reconnaissance vocale en arabe algérien, français, anglais. Dictée libre dans le dossier patient. Pas de clavier, pas de souris.</p>
-      </article>
-      <article class="service" data-reveal>
-        <div class="num mono">— Action</div>
-        <h3>Elle agit, pas juste répond</h3>
-        <p>Crée un patient, navigue dans l'app, lance des recherches, filtre vos données — depuis une simple commande vocale ou textuelle.</p>
-      </article>
-      <article class="service" data-reveal>
-        <div class="num mono">— Configuration</div>
-        <h3>Personnalité sur mesure</h3>
-        <p>5 personnalités, 5 cultures, sujets sensibles, règles spécifiques. Configurée par le propriétaire, à votre image.</p>
-      </article>
-    </div>
-  </div>
-</section>
-
-<!-- ======== PROCESS / ONBOARDING ======== -->
-<section id="process">
-  <div class="wrap">
-    <div class="sec-head" data-reveal>
-      <div>
-        <div class="eyebrow"><span class="dot"></span> 03 — Démarrage</div>
-      </div>
-      <div>
-        <h2>De zéro à opérationnel en <span class="accent-text">72 heures.</span></h2>
-      </div>
-    </div>
-
-    <div class="steps">
-      <div class="step" data-reveal>
-        <div class="step-num mono">[ 01 ]</div>
-        <h4>Audit & extraction</h4>
-        <p>Notre équipe extrait vos données depuis Excel, vos cahiers, ou tout autre logiciel existant. Aucune perte. Aucun effort de votre part.</p>
-      </div>
-      <div class="step" data-reveal>
-        <div class="step-num mono">[ 02 ]</div>
-        <h4>Setup workflow</h4>
-        <p>Configuration sur mesure de vos départements, boxes, rôles, permissions. Importation patients, staff, traitements, tarifs.</p>
-      </div>
-      <div class="step" data-reveal>
-        <div class="step-num mono">[ 03 ]</div>
-        <h4>Formation équipe</h4>
-        <p>2 demi-journées de formation pour vos équipes : réception, assistantes, médecins, caisse. Documentation et tutoriels en français.</p>
-      </div>
-      <div class="step" data-reveal>
-        <div class="step-num mono">[ 04 ]</div>
-        <h4>Mise en route</h4>
-        <p>Démarrage en parallèle puis bascule complète. Support sur site J1, J7, J30. Suivi propriétaire chaque semaine pendant 3 mois.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ======== TESTIMONIAL ======== -->
-<section>
-  <div class="wrap">
-    <div class="testimonial" data-reveal>
-      <div class="quote-mark">"</div>
-      <p class="quote-text">
-        Avant ClinicService, nos 24 boxes étaient pilotées sur 12 cahiers et 4 fichiers Excel. Aujourd'hui, je vois en temps réel chaque encaissement, chaque file d'attente, chaque retard. Ma productivité a augmenté de <span class="accent-text" style="color: var(--accent-bright);">40%</span> en 4 mois.
-      </p>
-      <div class="quote-meta">
-        <div class="quote-avatar">DZ</div>
-        <div>
-          <div class="quote-name">Dr. Zekri</div>
-          <div class="quote-role">Fondateur · Zekri Dental Clinic, Alger</div>
+  <!-- HERO MOCKUP -->
+  <div class="hero-mockup-wrap" data-reveal>
+    <div class="hero-mockup">
+      <div class="mockup-window">
+        <div class="mockup-bar">
+          <span class="d"></span><span class="d"></span><span class="d"></span>
+          <span class="addr">app.clinicservice.app/dashboard</span>
+        </div>
+        <div class="mockup-body">
+          <aside class="mockup-sidebar">
+            <div class="brand">
+              <span class="brand-dot"></span>
+              <span class="brand-name">ClinicService</span>
+            </div>
+            <div class="mockup-link active">
+              <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+              Tableau de bord
+            </div>
+            <div class="mockup-link">
+              <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21v-2a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4v2"/></svg>
+              Patients
+            </div>
+            <div class="mockup-link">
+              <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+              Agenda
+            </div>
+            <div class="mockup-link">
+              <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="6" width="20" height="12" rx="2"/></svg>
+              Caisse
+            </div>
+            <div class="mockup-link">
+              <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/></svg>
+              Imagerie
+            </div>
+            <div class="mockup-link">
+              <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4z"/></svg>
+              Stock
+            </div>
+          </aside>
+          <main class="mockup-main">
+            <div class="mockup-head">
+              <span class="h-title">Tableau de bord — Aujourd'hui</span>
+              <span class="h-stat">Synchronisé · live</span>
+            </div>
+            <div class="mockup-kpis">
+              <div class="mockup-kpi"><div class="lbl">Patients</div><div class="val">42</div><div class="delta">▲ +12%</div></div>
+              <div class="mockup-kpi glow"><div class="lbl">Encaissé</div><div class="val">187k</div><div class="delta">▲ +8%</div></div>
+              <div class="mockup-kpi"><div class="lbl">Boxes</div><div class="val">22/24</div><div class="delta" style="color: var(--text-3);">2 en pause</div></div>
+              <div class="mockup-kpi"><div class="lbl">File</div><div class="val">7</div><div class="delta" style="color: var(--text-3);">~12 min</div></div>
+            </div>
+            <div class="mockup-rows">
+              <div class="mockup-row">
+                <div class="name">
+                  <span class="av blue">FB</span>
+                  <div>Fatima Boukhalfa <span class="sub">Implant · Box 3 · Dr. Belkacem</span></div>
+                </div>
+                <span class="badge">Confirmé</span>
+                <div class="time">09:30</div>
+              </div>
+              <div class="mockup-row">
+                <div class="name">
+                  <span class="av bright">AT</span>
+                  <div>Amine Tahar <span class="sub">Blanchiment · Box 7</span></div>
+                </div>
+                <span class="badge">En cours</span>
+                <div class="time">10:00</div>
+              </div>
+              <div class="mockup-row">
+                <div class="name">
+                  <span class="av soft">SM</span>
+                  <div>Sara Mansouri <span class="sub">ODF · Box 2 · Dr. Larbi</span></div>
+                </div>
+                <span class="badge">Confirmé</span>
+                <div class="time">10:30</div>
+              </div>
+            </div>
+          </main>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ======== STATS / NUMBERS ======== -->
-<section>
+<!-- ============ MARQUEE ============ -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span class="marquee-item">ZEKRI <span class="accent-text">Dental</span></span>
+    <span class="marquee-sep">/</span>
+    <span class="marquee-item">CLINIQUE ATLAS</span>
+    <span class="marquee-sep">/</span>
+    <span class="marquee-item">Smile<span class="accent-text">Care</span></span>
+    <span class="marquee-sep">/</span>
+    <span class="marquee-item">DentaPlus⁺</span>
+    <span class="marquee-sep">/</span>
+    <span class="marquee-item">Cabinet Mansouri</span>
+    <span class="marquee-sep">/</span>
+    <span class="marquee-item">ORTHO<span style="color: var(--text-3); font-weight: 300;">DZ</span></span>
+    <span class="marquee-sep">/</span>
+    <span class="marquee-item">ZEKRI <span class="accent-text">Dental</span></span>
+    <span class="marquee-sep">/</span>
+    <span class="marquee-item">CLINIQUE ATLAS</span>
+    <span class="marquee-sep">/</span>
+    <span class="marquee-item">Smile<span class="accent-text">Care</span></span>
+    <span class="marquee-sep">/</span>
+    <span class="marquee-item">DentaPlus⁺</span>
+    <span class="marquee-sep">/</span>
+    <span class="marquee-item">Cabinet Mansouri</span>
+    <span class="marquee-sep">/</span>
+    <span class="marquee-item">ORTHO<span style="color: var(--text-3); font-weight: 300;">DZ</span></span>
+  </div>
+</div>
+
+<!-- ============ STATS STRIP ============ -->
+<div class="stats-strip">
+  <div class="stat-cell">
+    <div class="lbl">Patients gérés</div>
+    <div class="val">6,5<span class="unit">k+</span></div>
+    <div class="desc">sur la plateforme, en croissance continue</div>
+  </div>
+  <div class="stat-cell">
+    <div class="lbl">Boxes simultanées</div>
+    <div class="val">24</div>
+    <div class="desc">par site, sans plafond pour les groupes</div>
+  </div>
+  <div class="stat-cell">
+    <div class="lbl">Équipes connectées</div>
+    <div class="val">80<span class="unit">+</span></div>
+    <div class="desc">membres en temps réel sur la plateforme</div>
+  </div>
+  <div class="stat-cell">
+    <div class="lbl">Langues</div>
+    <div class="val">3</div>
+    <div class="desc">Français · Arabe · Anglais — interface complète</div>
+  </div>
+</div>
+
+<!-- ============ FEATURES BENTO ============ -->
+<section id="features">
   <div class="wrap">
     <div class="sec-head" data-reveal>
-      <div>
-        <div class="eyebrow"><span class="dot"></span> 04 — En chiffres</div>
+      <div class="sec-meta">
+        <div class="eyebrow"><span class="dot"></span> 01 — Fonctionnalités</div>
       </div>
       <div>
-        <h2>Une plateforme qui <span class="accent-text">monte en charge.</span></h2>
+        <h2>Une plateforme. <span class="ital" style="font-family: 'Fraunces'; font-style: italic; font-weight: 400; color: var(--accent-bright);">Toute votre clinique</span>, en temps réel.</h2>
       </div>
     </div>
 
-    <div class="stats">
-      <div class="stat" data-reveal>
-        <div class="num">99.9<span class="unit">%</span></div>
-        <div class="lbl">Disponibilité garantie par contrat (SLA Enterprise)</div>
+    <div class="bento" data-reveal>
+
+      <article class="b-card b-3 b-tall b-feature">
+        <div class="corner-glow"></div>
+        <div class="b-num">N°01 · Patients</div>
+        <span class="ic">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 21v-2a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4v2"/></svg>
+        </span>
+        <h3>Dossier patient. <span class="ital">Schéma 32 dents.</span></h3>
+        <p>Fiche médicale complète, plan de traitement, photos illimitées, signatures électroniques, viewer 3D des modèles labo. Notation FDIS interactive avec suivi temps réel.</p>
+        <div class="mock-chart">
+          <span class="tooth"></span><span class="tooth"></span><span class="tooth t-blue"></span><span class="tooth"></span><span class="tooth t-warn"></span><span class="tooth"></span><span class="tooth t-bright"></span><span class="tooth"></span>
+          <span class="tooth"></span><span class="tooth t-blue"></span><span class="tooth"></span><span class="tooth"></span><span class="tooth"></span><span class="tooth t-bright"></span><span class="tooth"></span><span class="tooth t-bad"></span>
+          <span class="tooth"></span><span class="tooth"></span><span class="tooth t-warn"></span><span class="tooth"></span><span class="tooth"></span><span class="tooth"></span><span class="tooth"></span><span class="tooth"></span>
+          <span class="tooth"></span><span class="tooth"></span><span class="tooth"></span><span class="tooth t-blue"></span><span class="tooth"></span><span class="tooth"></span><span class="tooth"></span><span class="tooth"></span>
+        </div>
+        <div class="legend">
+          <span><span class="d" style="background: var(--accent-bright);"></span> Plan</span>
+          <span><span class="d" style="background: var(--accent-soft);"></span> Traité</span>
+          <span><span class="d" style="background: var(--warn);"></span> Carie</span>
+          <span><span class="d" style="background: var(--bad);"></span> Absent</span>
+        </div>
+      </article>
+
+      <article class="b-card b-3">
+        <div class="corner-glow"></div>
+        <div class="b-num">N°02 · Caisse</div>
+        <span class="ic">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2"/></svg>
+        </span>
+        <h3>Caisse multi-postes <span class="ital">temps réel.</span></h3>
+        <p>Pensée comme un POS de restaurant. File d'attente intelligente, splits commission auto, paiement CIB / Edahabia / espèces.</p>
+        <div class="mock-receipt">
+          <div class="r"><span>Implant + couronne</span><span>76 500</span></div>
+          <div class="r"><span>Détartrage</span><span>3 500</span></div>
+          <div class="r"><span>Plombage ×2</span><span>8 000</span></div>
+          <div class="r"><span>Remise 15%</span><span class="pos">−13 200</span></div>
+          <div class="r t"><span>Total file</span><span>74 800 DA</span></div>
+        </div>
+      </article>
+
+      <article class="b-card b-3">
+        <div class="corner-glow"></div>
+        <div class="b-num">N°03 · Agenda</div>
+        <span class="ic">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+        </span>
+        <h3>Agenda <span class="ital">multi-praticiens.</span></h3>
+        <p>Drag & drop, créneaux 15 min, sync Google Calendar. Affectation automatique aux boxes.</p>
+        <div class="mock-bars">
+          <div class="bar" style="height: 40%;"></div>
+          <div class="bar" style="height: 60%;"></div>
+          <div class="bar peak" style="height: 92%;"></div>
+          <div class="bar" style="height: 72%;"></div>
+          <div class="bar" style="height: 55%;"></div>
+          <div class="bar peak" style="height: 88%;"></div>
+          <div class="bar" style="height: 68%;"></div>
+        </div>
+      </article>
+
+      <article class="b-card b-2">
+        <div class="corner-glow"></div>
+        <div class="b-num">N°04 · DICOM</div>
+        <span class="ic">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18"/></svg>
+        </span>
+        <h3>Imagerie <span class="ital">DICOM.</span></h3>
+        <p>Pano, CBCT, rétro-alvéolaire dans le navigateur. Aucun logiciel tiers requis.</p>
+      </article>
+
+      <article class="b-card b-2">
+        <div class="corner-glow"></div>
+        <div class="b-num">N°05 · Workflow</div>
+        <span class="ic">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="6" cy="6" r="3"/><circle cx="18" cy="18" r="3"/><circle cx="6" cy="18" r="3"/><path d="M6 9v6M9 18h6M9 6h6a3 3 0 0 1 3 3v3"/></svg>
+        </span>
+        <h3>Workflow <span class="ital">visuel.</span></h3>
+        <p>Modélisez votre parcours patient en glisser-déposer. Sans code.</p>
+      </article>
+
+      <article class="b-card b-2">
+        <div class="corner-glow"></div>
+        <div class="b-num">N°06 · Sécurité</div>
+        <span class="ic">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+        </span>
+        <h3>Stock & <span class="ital">coffre-fort.</span></h3>
+        <p>Audit complet, soldes temps réel, accès propriétaire uniquement.</p>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ JULIA ============ -->
+<section id="julia">
+  <div class="wrap">
+    <div class="julia-hero" data-reveal>
+      <div class="julia-orb"></div>
+      <div class="eyebrow" style="margin-bottom: 24px;"><span class="dot"></span> 02 — Intelligence augmentée</div>
+      <h2>Rencontrez <span class="ital">Julia.</span></h2>
+      <p>
+        Pas un chatbot. Une <strong>assistante IA dédiée</strong> qui apprend votre clinique, détecte les anomalies, et exécute les tâches répétitives à votre place. <strong>Toutes les 5 minutes</strong>, elle scanne vos données — vous êtes alerté avant que ça devienne un problème.
+      </p>
+    </div>
+
+    <div class="mock-chat-big" data-reveal>
+      <div class="mock-bubble user">Combien de RDV demain ne sont pas confirmés ?</div>
+      <div class="mock-bubble ai">
+        <span class="tag">★ Julia · Anomalie détectée</span>
+        Demain : <strong>6 rendez-vous non confirmés</strong> sur 32. Risque de no-show élevé. Je peux envoyer un rappel WhatsApp à tous d'un clic ?
       </div>
-      <div class="stat" data-reveal>
-        <div class="num">76<span class="unit">+</span></div>
-        <div class="lbl">Tables base de données — modèle métier complet</div>
+      <div class="mock-bubble user">Oui, envoie.</div>
+      <div class="mock-bubble ai">
+        <span class="tag">★ Action exécutée · 10:42</span>
+        6 messages WhatsApp envoyés. Je te préviens à 16h si certains n'ont pas répondu.
       </div>
-      <div class="stat" data-reveal>
-        <div class="num">3</div>
-        <div class="lbl">Couches de cache pour des temps de réponse &lt; 100ms</div>
+    </div>
+
+    <div class="julia-tiles">
+      <div class="julia-tile" data-reveal>
+        <div class="l">— Mémoire</div>
+        <h4>Elle apprend votre clinique</h4>
+        <p>3 niveaux de mémoire : session, utilisateur, clinique entière. Préférences et profils patients retenus.</p>
       </div>
-      <div class="stat" data-reveal>
-        <div class="num">30<span class="unit">j</span></div>
-        <div class="lbl">Soft-delete de récupération sur toute donnée supprimée</div>
+      <div class="julia-tile" data-reveal>
+        <div class="l">— Voix</div>
+        <h4>Parlez en darija</h4>
+        <p>Reconnaissance vocale en arabe algérien, français, anglais. Dictée libre dans le dossier patient.</p>
+      </div>
+      <div class="julia-tile" data-reveal>
+        <div class="l">— Action</div>
+        <h4>Elle agit, pas répond</h4>
+        <p>Crée un patient, navigue, lance des recherches — depuis une commande vocale ou textuelle.</p>
+      </div>
+      <div class="julia-tile" data-reveal>
+        <div class="l">— Configuration</div>
+        <h4>Personnalité sur mesure</h4>
+        <p>5 personnalités, 5 cultures, sujets sensibles. Configurée par le propriétaire, à votre image.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ======== COMPARE ======== -->
+<!-- ============ PROCESS ============ -->
+<section id="process">
+  <div class="wrap">
+    <div class="sec-head" data-reveal>
+      <div class="sec-meta">
+        <div class="eyebrow"><span class="dot"></span> 03 — Démarrage</div>
+      </div>
+      <div>
+        <h2>De zéro à opérationnel en <span class="ital" style="font-family: 'Fraunces'; font-style: italic; font-weight: 400; color: var(--accent-bright);">72 heures.</span></h2>
+      </div>
+    </div>
+
+    <div class="process-list" data-reveal>
+      <div class="process-row">
+        <div class="process-num">01</div>
+        <div class="process-info">
+          <span class="p-tag">★ J+0 · Audit</span>
+          <h4>Extraction de vos données existantes.</h4>
+        </div>
+        <p class="process-desc">Notre équipe technique extrait vos données depuis Excel, vos cahiers, ou tout autre logiciel existant. Aucune perte, aucun effort de votre part. Nous validons avec vous le mapping avant import.</p>
+      </div>
+      <div class="process-row">
+        <div class="process-num">02</div>
+        <div class="process-info">
+          <span class="p-tag">J+1 · Setup</span>
+          <h4>Configuration de votre workflow sur mesure.</h4>
+        </div>
+        <p class="process-desc">Configuration de vos départements, boxes, rôles, permissions selon votre organisation. Importation patients, staff, traitements, tarifs. La plateforme reflète votre clinique.</p>
+      </div>
+      <div class="process-row">
+        <div class="process-num">03</div>
+        <div class="process-info">
+          <span class="p-tag">J+2 · Formation</span>
+          <h4>2 demi-journées pour former vos équipes.</h4>
+        </div>
+        <p class="process-desc">Réception, assistantes, médecins, caisse — chaque rôle reçoit la formation adaptée. Documentation et tutoriels vidéo en français.</p>
+      </div>
+      <div class="process-row">
+        <div class="process-num">04</div>
+        <div class="process-info">
+          <span class="p-tag">J+3 · Live</span>
+          <h4>Bascule complète. Vous êtes en route.</h4>
+        </div>
+        <p class="process-desc">Démarrage en parallèle puis bascule complète. Support sur site J1, J7, J30. Suivi propriétaire chaque semaine pendant 3 mois.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TESTIMONIAL ============ -->
+<section>
+  <div class="wrap">
+    <div class="testimonial-wrap" data-reveal>
+      <div class="testimonial-tag">Témoignage client · Mai 2026</div>
+      <p class="testimonial-quote">
+        Avant ClinicService, nos 24 boxes étaient pilotées sur 12 cahiers et 4 fichiers Excel. Aujourd'hui, je vois en temps réel chaque encaissement, chaque file d'attente, chaque retard. Ma productivité a augmenté de <span class="pop">40 %</span> en 4 mois.
+      </p>
+      <div class="testimonial-author">
+        <div class="av">DZ</div>
+        <div>
+          <div class="n">Dr. Zekri</div>
+          <div class="r">Fondateur · Zekri Dental Clinic, Alger</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ COMPARE ============ -->
 <section>
   <div class="wrap">
     <div class="sec-head" data-reveal>
-      <div>
-        <div class="eyebrow"><span class="dot"></span> 05 — Comparaison</div>
+      <div class="sec-meta">
+        <div class="eyebrow"><span class="dot"></span> 04 — Versus</div>
       </div>
       <div>
-        <h2>Pourquoi pas une <span style="color: var(--text-3);">autre solution&nbsp;?</span></h2>
+        <h2>Pourquoi pas une <span class="ital" style="font-family: 'Fraunces'; font-style: italic; font-weight: 400; color: var(--accent-bright);">autre solution ?</span></h2>
       </div>
     </div>
 
@@ -599,8 +1242,8 @@
           </tr>
           <tr>
             <td class="feat-name">Risque de perte / fraude</td>
-            <td style="color: #f87171;">Élevé</td>
-            <td style="color: #fbbf24;">Modéré</td>
+            <td style="color: var(--bad);">Élevé</td>
+            <td style="color: var(--warn);">Modéré</td>
             <td class="cs-col" style="color: var(--accent-bright);">Audit complet</td>
           </tr>
         </tbody>
@@ -609,19 +1252,19 @@
   </div>
 </section>
 
-<!-- ======== FAQ ======== -->
+<!-- ============ FAQ ============ -->
 <section id="faq">
   <div class="wrap">
     <div class="sec-head" data-reveal>
-      <div>
-        <div class="eyebrow"><span class="dot"></span> 07 — FAQ</div>
+      <div class="sec-meta">
+        <div class="eyebrow"><span class="dot"></span> 05 — Questions</div>
       </div>
       <div>
-        <h2>Questions <span class="accent-text">fréquentes.</span></h2>
+        <h2>Questions <span class="ital" style="font-family: 'Fraunces'; font-style: italic; font-weight: 400; color: var(--accent-bright);">fréquentes.</span></h2>
       </div>
     </div>
 
-    <div class="faq">
+    <div class="faq" data-reveal>
       <details class="q">
         <summary>Combien de temps prend la migration depuis notre ancien système ?<span class="plus">+</span></summary>
         <p class="ans">En général 24 à 72 heures. Notre équipe technique extrait vos données depuis Excel, vos cahiers, ou tout autre logiciel, puis les importe dans ClinicService. Vous validez. Nous formons vos équipes en 2 demi-journées. Vous démarrez le lendemain.</p>
@@ -632,65 +1275,64 @@
       </details>
       <details class="q">
         <summary>Mes données sont-elles vraiment privées ?<span class="plus">+</span></summary>
-        <p class="ans">Oui. Chaque clinique a son propre espace isolé via Clerk userId. Aucune autre clinique n'a accès à vos données. Les fichiers (radios, photos) sont stockés sur Google Cloud Storage avec URLs signées temporaires. Postgres Neon avec sauvegardes automatiques. Vous pouvez exporter ou supprimer vos données à tout moment.</p>
-      </details>
-      <details class="q">
-        <summary>Julia (l'IA) coûte-t-elle plus cher ?<span class="plus">+</span></summary>
-        <p class="ans">Non. Julia est incluse dans le tarif de base à partir du plan Clinique. Pour le plan Cabinet, vous bénéficiez de 100 requêtes Julia par mois ; au-delà, c'est facturé à l'usage (≈ 5 DA par requête).</p>
+        <p class="ans">Oui. Chaque clinique a son propre espace isolé. Aucune autre clinique n'a accès à vos données. Fichiers stockés sur Google Cloud Storage avec URLs signées temporaires. Postgres avec sauvegardes automatiques. Export ou suppression possible à tout moment.</p>
       </details>
       <details class="q">
         <summary>Puis-je personnaliser le workflow patient ?<span class="plus">+</span></summary>
-        <p class="ans">Absolument. C'est l'un de nos arguments clés. Notre concepteur visuel ReactFlow vous laisse dessiner votre flux : 1 département ou 10, 2 boxes ou 24, transitions automatiques selon le motif de la visite, etc.</p>
+        <p class="ans">Absolument. C'est l'un de nos arguments clés. Notre concepteur visuel vous laisse dessiner votre flux : 1 département ou 10, 2 boxes ou 24, transitions automatiques selon le motif de visite.</p>
       </details>
       <details class="q">
-        <summary>Le tarif évolue-t-il chaque année ?<span class="plus">+</span></summary>
-        <p class="ans">Le tarif est verrouillé à votre signature. Il n'évoluera que si nos coûts d'infrastructure mondiaux (Cloud, IA, devises) bougent significativement — et toujours avec préavis 90 jours.</p>
+        <summary>Quels moyens de paiement acceptez-vous ?<span class="plus">+</span></summary>
+        <p class="ans">Tous les modes de paiement algériens : CIB, Edahabia, virement bancaire, chèque. Facturation mensuelle ou annuelle avec 2 mois offerts. Facture conforme aux règles fiscales algériennes.</p>
       </details>
       <details class="q">
-        <summary>Comment payez-je ? Carte CIB, virement, Edahabia ?<span class="plus">+</span></summary>
-        <p class="ans">Tous les modes de paiement algériens sont supportés : CIB, Edahabia, virement bancaire, chèque. Facturation mensuelle ou annuelle (avec 2 mois offerts). Facture conforme aux règles fiscales algériennes.</p>
+        <summary>Julia (l'IA) est-elle vraiment dédiée à ma clinique ?<span class="plus">+</span></summary>
+        <p class="ans">Oui. Julia apprend exclusivement de votre clinique. Personnalité, ton, culture et règles configurables par le propriétaire. Trois niveaux de mémoire isolés : session, utilisateur, clinique.</p>
       </details>
     </div>
   </div>
 </section>
 
-<!-- ======== CTA ======== -->
-<section id="contact">
-  <div class="wrap">
-    <div class="cta-box" data-reveal>
-      <div class="eyebrow" style="justify-content: center; margin-bottom: 24px;"><span class="dot"></span> 08 — Démo</div>
-      <h2>Prêt à transformer <br/><span class="accent-text">votre clinique&nbsp;?</span></h2>
-      <p class="sub">Réservez une démo de 30 minutes avec notre équipe. Nous installons ClinicService chez vous gratuitement pendant 30 jours. Vous décidez ensuite.</p>
-      <div class="btns">
-        <a href="https://wa.me/213XXXXXXXXX?text=Bonjour%2C%20je%20souhaite%20une%20d%C3%A9mo%20ClinicService" class="btn btn-primary">WhatsApp démo
-          <svg class="btn-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
-        </a>
-        <a href="mailto:contact@clinicservice.app" class="btn btn-ghost">contact@clinicservice.app</a>
-      </div>
-      <div style="margin-top: 32px; display: flex; flex-wrap: wrap; justify-content: center; gap: 24px; color: var(--text-3); font-size: 13px;">
-        <span>+213 XX XX XX XX</span>
-        <span>·</span>
-        <span>Alger, Algérie</span>
-        <span>·</span>
-        <span>Réponse &lt; 2h en semaine</span>
-      </div>
+<!-- ============ CTA ============ -->
+<section class="cta-section" id="contact">
+  <div class="cta-bloom"></div>
+  <div class="cta-box" data-reveal>
+    <div class="eyebrow" style="margin: 0 auto 32px; display: inline-flex;"><span class="dot"></span> 06 — Démo gratuite</div>
+    <h2>Prêt à transformer<br/>votre <span class="ital">clinique ?</span></h2>
+    <p>Réservez une démo de 30 minutes avec notre équipe. Installation gratuite chez vous pendant 30 jours. Vous décidez ensuite.</p>
+    <div class="cta-btns">
+      <a href="https://wa.me/213XXXXXXXXX?text=Bonjour%2C%20je%20souhaite%20une%20d%C3%A9mo%20ClinicService" class="btn btn-lg btn-primary">
+        WhatsApp démo
+        <svg class="btn-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+      </a>
+      <a href="mailto:contact@clinicservice.app" class="btn btn-lg btn-ghost">contact@clinicservice.app</a>
+    </div>
+    <div class="cta-meta">
+      <span>+213 XX XX XX XX</span>
+      <span class="sep">·</span>
+      <span>Alger, Algérie</span>
+      <span class="sep">·</span>
+      <span>Réponse &lt; 2 h</span>
     </div>
   </div>
 </section>
 
-<!-- ======== FOOTER ======== -->
+<!-- ============ FOOTER ============ -->
 <footer class="foot">
   <div class="wrap">
     <div class="foot-row">
       <div>
-        <a href="#" class="logo"><span class="logo-dot"></span><span>ClinicService</span></a>
-        <p style="color: var(--text-2); font-size: 14px; margin-top: 16px; max-width: 320px; line-height: 1.55;">Le système d'exploitation des cliniques dentaires. Conçu en Algérie. Pour l'Algérie.</p>
+        <a href="#" class="logo">
+          <span class="logo-dot"></span>
+          <span>ClinicService</span>
+        </a>
+        <p style="color: var(--text-2); font-size: 14px; margin-top: 16px; max-width: 320px; line-height: 1.55;">Le système d'exploitation des cliniques dentaires. Conçu en Algérie. Augmenté par IA.</p>
       </div>
       <div>
         <h5>Produit</h5>
         <ul>
-          <li><a href="#services">Fonctionnalités</a></li>
-          <li><a href="#julia">IA Julia</a></li>
+          <li><a href="#features">Fonctionnalités</a></li>
+          <li><a href="#julia">Julia AI</a></li>
           <li><a href="#process">Démarrage</a></li>
           <li><a href="#contact">Démo</a></li>
         </ul>
@@ -715,10 +1357,10 @@
       </div>
     </div>
 
-    <div class="foot-wordmark">CLINICSERVICE</div>
+    <div class="foot-wordmark">ClinicService</div>
 
     <div class="foot-bottom">
-      <div>© 2026 ClinicService. Tous droits réservés.</div>
+      <div>© 2026 ClinicService · Tous droits réservés · Édition Mai 2026</div>
       <div style="display: flex; gap: 24px;">
         <a href="#" style="color: var(--text-3); text-decoration: none;">Facebook</a>
         <a href="#" style="color: var(--text-3); text-decoration: none;">Instagram</a>
@@ -730,12 +1372,10 @@
 </footer>
 
 <script>
-  // Reveal on scroll
   const io = new IntersectionObserver((entries) => {
     entries.forEach((e) => { if (e.isIntersecting) e.target.classList.add('in'); });
   }, { threshold: 0.1 });
   document.querySelectorAll('[data-reveal]').forEach((el) => io.observe(el));
 </script>
-
 </body>
 </html>
