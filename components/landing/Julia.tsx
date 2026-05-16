@@ -33,7 +33,7 @@ export function Julia() {
               />
             </div>
           </div>
-          <div className="mb-7 inline-flex items-center gap-2.5 rounded-full border border-[rgba(91,139,255,0.18)] bg-[rgba(91,139,255,0.06)] px-4 py-1.5 font-mono text-[12px] uppercase tracking-[0.1em] text-brand-bright">
+          <div className="mb-7 glass-pill inline-flex items-center gap-2.5 rounded-full border-transparent px-4 py-1.5 font-mono text-[12px] uppercase tracking-[0.1em] text-brand-bright">
             <span className="size-1.5 rounded-full bg-brand-bright shadow-[0_0_12px_var(--brand-bright)] animate-pulse-glow" />
             03 — Intelligence augmentée
           </div>
@@ -50,7 +50,7 @@ export function Julia() {
           <div className="self-end max-w-[80%] rounded-2xl rounded-br-md bg-gradient-to-b from-brand-mid to-brand px-4 py-3 text-[13px] leading-[1.55] text-white shadow-[0_8px_24px_rgba(0,23,108,0.45)]">
             Combien de RDV demain ne sont pas confirmés ?
           </div>
-          <div className="self-start max-w-[80%] rounded-2xl rounded-bl-md border border-[#2a2a32] bg-card px-4 py-3 text-[13px] leading-[1.55] text-muted-foreground backdrop-blur-2xl">
+          <div className="glass-strong self-start max-w-[80%] rounded-2xl rounded-bl-md border-transparent px-4 py-3 text-[13px] leading-[1.55] text-muted-foreground">
             <span className="mb-1.5 block font-mono text-[9px] uppercase tracking-[0.15em] text-brand-bright">
               ★ Julia · Anomalie détectée
             </span>
@@ -59,7 +59,7 @@ export function Julia() {
           <div className="self-end max-w-[80%] rounded-2xl rounded-br-md bg-gradient-to-b from-brand-mid to-brand px-4 py-3 text-[13px] leading-[1.55] text-white shadow-[0_8px_24px_rgba(0,23,108,0.45)]">
             Oui, envoie.
           </div>
-          <div className="self-start max-w-[80%] rounded-2xl rounded-bl-md border border-[#2a2a32] bg-card px-4 py-3 text-[13px] leading-[1.55] text-muted-foreground backdrop-blur-2xl">
+          <div className="glass-strong self-start max-w-[80%] rounded-2xl rounded-bl-md border-transparent px-4 py-3 text-[13px] leading-[1.55] text-muted-foreground">
             <span className="mb-1.5 block font-mono text-[9px] uppercase tracking-[0.15em] text-brand-bright">
               ★ Action exécutée · 10:42
             </span>
@@ -72,7 +72,7 @@ export function Julia() {
           {TILES.map((t) => (
             <div
               key={t.title}
-              className="rounded-2xl border border-border bg-gradient-to-b from-card to-[#0c0c10] p-6 transition-all hover:-translate-y-0.5 hover:border-[rgba(91,139,255,0.25)]"
+              className="glass glass-hover glass-shimmer glass-caustic rounded-2xl p-6"
             >
               <div className="mb-4 font-mono text-[10px] uppercase tracking-[0.2em] text-brand-bright">{t.l}</div>
               <h4 className="mb-2 text-[18px] font-semibold">{t.title}</h4>

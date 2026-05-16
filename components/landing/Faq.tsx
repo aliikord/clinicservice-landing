@@ -39,7 +39,7 @@ export function Faq() {
       <div className="mx-auto max-w-7xl px-6">
         <div className="mb-20 grid gap-6 md:grid-cols-[1fr_1.5fr] md:gap-20">
           <div>
-            <div className="inline-flex items-center gap-2.5 rounded-full border border-[rgba(91,139,255,0.18)] bg-[rgba(91,139,255,0.06)] px-4 py-1.5 font-mono text-[12px] uppercase tracking-[0.1em] text-brand-bright">
+            <div className="glass-pill inline-flex items-center gap-2.5 rounded-full border-transparent px-4 py-1.5 font-mono text-[12px] uppercase tracking-[0.1em] text-brand-bright">
               <span className="size-1.5 rounded-full bg-brand-bright shadow-[0_0_12px_var(--brand-bright)] animate-pulse-glow" />
               06 — Questions
             </div>
@@ -49,12 +49,12 @@ export function Faq() {
           </h2>
         </div>
 
-        <Accordion type="single" collapsible className="mx-auto max-w-[920px]">
+        <Accordion type="single" collapsible className="mx-auto flex max-w-[920px] flex-col gap-3">
           {QA.map((item, i) => (
             <AccordionItem
               key={i}
               value={`q-${i}`}
-              className="border-b border-border py-2"
+              className="glass glass-hover rounded-2xl border-transparent px-6"
             >
               <AccordionTrigger className="cursor-pointer py-5 text-left text-[19px] font-medium tracking-[-0.01em] hover:no-underline data-[state=open]:text-brand-bright">
                 {item.q}

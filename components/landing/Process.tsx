@@ -31,7 +31,7 @@ export function Process() {
       <div className="mx-auto max-w-7xl px-6">
         <div className="mb-20 grid gap-6 md:grid-cols-[1fr_1.5fr] md:gap-20">
           <div>
-            <div className="inline-flex items-center gap-2.5 rounded-full border border-[rgba(91,139,255,0.18)] bg-[rgba(91,139,255,0.06)] px-4 py-1.5 font-mono text-[12px] uppercase tracking-[0.1em] text-brand-bright">
+            <div className="glass-pill inline-flex items-center gap-2.5 rounded-full border-transparent px-4 py-1.5 font-mono text-[12px] uppercase tracking-[0.1em] text-brand-bright">
               <span className="size-1.5 rounded-full bg-brand-bright shadow-[0_0_12px_var(--brand-bright)] animate-pulse-glow" />
               04 — Démarrage
             </div>
@@ -61,7 +61,7 @@ export function Process() {
                 </span>
               </div>
               <div>
-                <span className="mb-4.5 inline-flex items-center gap-2 rounded-full border border-[rgba(91,139,255,0.18)] bg-[rgba(91,139,255,0.06)] px-3.5 py-1.5 font-mono text-[11px] uppercase tracking-[0.15em] text-brand-bright">
+                <span className="glass-pill mb-4.5 inline-flex items-center gap-2 rounded-full border-transparent px-3.5 py-1.5 font-mono text-[11px] uppercase tracking-[0.15em] text-brand-bright">
                   {s.tag}
                 </span>
                 <h4 className="text-[clamp(26px,3.2vw,36px)] font-semibold leading-[1.1] tracking-[-0.02em]">

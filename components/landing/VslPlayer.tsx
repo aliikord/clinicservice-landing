@@ -51,9 +51,9 @@ export function VslPlayer() {
           <div className="absolute left-1/2 top-1/2 size-[920px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-[rgba(91,139,255,0.06)]" />
         </div>
 
-        {/* Player */}
+        {/* Player — glass frame */}
         <div
-          className="relative z-[5] overflow-hidden rounded-3xl border border-[#2a2a32] bg-background shadow-[0_1px_0_rgba(255,255,255,0.06)_inset,0_40px_100px_rgba(0,0,0,0.55),0_0_0_1px_rgba(91,139,255,0.10),0_0_100px_rgba(0,23,108,0.30)]"
+          className="glass-strong glass-shimmer glass-caustic relative z-[5] overflow-hidden rounded-3xl p-2"
           style={{ aspectRatio: "16 / 9" }}
         >
           {createElement("wistia-player", {

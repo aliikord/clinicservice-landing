@@ -37,7 +37,7 @@ export function DashboardMockup() {
         }}
       />
       <div className="mx-auto max-w-[720px] px-6 text-center">
-        <div className="mb-6 inline-flex items-center gap-2.5 rounded-full border border-[rgba(91,139,255,0.18)] bg-[rgba(91,139,255,0.06)] px-4 py-1.5 font-mono text-[12px] uppercase tracking-[0.1em] text-brand-bright">
+        <div className="mb-6 glass-pill inline-flex items-center gap-2.5 rounded-full border-transparent px-4 py-1.5 font-mono text-[12px] uppercase tracking-[0.1em] text-brand-bright">
           <span className="size-1.5 rounded-full bg-brand-bright shadow-[0_0_12px_var(--brand-bright)] animate-pulse-glow" />
           02 — L&apos;interface
         </div>
@@ -51,12 +51,10 @@ export function DashboardMockup() {
 
       <div className="relative mx-auto mt-16 max-w-[1280px] px-6" style={{ perspective: 2000 }}>
         <div
-          className="relative overflow-hidden rounded-[28px] border border-[#2a2a32] bg-gradient-to-b from-card to-[#0c0c10] p-3.5"
+          className="glass-strong glass-shimmer glass-caustic relative overflow-hidden rounded-[28px] p-3.5"
           style={{
             transform: "rotateX(1.5deg)",
             transformOrigin: "center top",
-            boxShadow:
-              "0 1px 0 rgba(255,255,255,0.06) inset, 0 50px 120px rgba(0,0,0,0.65), 0 0 0 1px rgba(91,139,255,0.08), 0 0 100px rgba(0,23,108,0.25)",
           }}
         >
           <div className="absolute inset-x-1/4 top-0 h-px bg-gradient-to-r from-transparent via-[rgba(91,139,255,0.5)] to-transparent" />

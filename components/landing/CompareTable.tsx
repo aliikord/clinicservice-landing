@@ -13,7 +13,7 @@ export function CompareTable() {
       <div className="mx-auto max-w-7xl px-6">
         <div className="mb-20 grid gap-6 md:grid-cols-[1fr_1.5fr] md:gap-20">
           <div>
-            <div className="inline-flex items-center gap-2.5 rounded-full border border-[rgba(91,139,255,0.18)] bg-[rgba(91,139,255,0.06)] px-4 py-1.5 font-mono text-[12px] uppercase tracking-[0.1em] text-brand-bright">
+            <div className="glass-pill inline-flex items-center gap-2.5 rounded-full border-transparent px-4 py-1.5 font-mono text-[12px] uppercase tracking-[0.1em] text-brand-bright">
               <span className="size-1.5 rounded-full bg-brand-bright shadow-[0_0_12px_var(--brand-bright)] animate-pulse-glow" />
               05 — Versus
             </div>
@@ -23,7 +23,7 @@ export function CompareTable() {
           </h2>
         </div>
 
-        <div className="overflow-hidden rounded-3xl border border-border bg-gradient-to-b from-card to-[#0c0c10]">
+        <div className="glass glass-shimmer overflow-hidden rounded-3xl">
           <table className="w-full border-collapse text-[15px]">
             <thead>
               <tr>

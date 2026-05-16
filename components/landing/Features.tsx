@@ -15,33 +15,18 @@ type BCardProps = {
 function BCard({ num, Icon, title, desc, children, span = "", rowSpan = "", feature = false }: BCardProps) {
   return (
     <Card
-      className={`relative flex flex-col gap-0 overflow-hidden rounded-3xl border border-border bg-gradient-to-b from-card to-[#0c0c10] p-8 transition-all hover:-translate-y-[3px] hover:border-[rgba(91,139,255,0.25)] hover:shadow-[0_20px_60px_rgba(0,0,0,0.4),0_0_60px_rgba(91,139,255,0.10)] ${span} ${rowSpan} ${
-        feature
-          ? "border-[rgba(91,139,255,0.20)] bg-[radial-gradient(ellipse_at_top_right,rgba(0,23,108,0.30),transparent_50%)]"
-          : ""
-      }`}
+      className={`${feature ? "glass-blue" : "glass"} glass-shimmer glass-hover glass-caustic relative flex flex-col gap-0 overflow-hidden rounded-3xl p-8 ${span} ${rowSpan}`}
     >
-      {/* Top edge */}
-      <div className="absolute inset-x-6 top-0 h-px bg-gradient-to-r from-transparent via-[rgba(91,139,255,0.20)] to-transparent" />
-      {/* Corner glow */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute -right-8 -top-8 size-56 blur-[20px]"
-        style={{
-          background:
-            "radial-gradient(circle, rgba(91,139,255,0.18), transparent 60%)",
-        }}
-      />
 
-      <div className="mb-4 font-mono text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
+      <div className="relative z-[2] mb-4 font-mono text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
         {num}
       </div>
-      <span className="mb-6 inline-flex size-11 items-center justify-center rounded-xl border border-[rgba(91,139,255,0.18)] bg-[rgba(91,139,255,0.08)] text-brand-bright">
+      <span className="glass-pill relative z-[2] mb-6 inline-flex size-11 items-center justify-center rounded-xl border-transparent text-brand-bright">
         <Icon className="size-5" />
       </span>
-      <h3 className="mb-3 text-[22px] font-semibold leading-tight">{title}</h3>
-      <p className="text-[14px] leading-[1.6] text-muted-foreground">{desc}</p>
-      {children}
+      <h3 className="relative z-[2] mb-3 text-[22px] font-semibold leading-tight">{title}</h3>
+      <p className="relative z-[2] text-[14px] leading-[1.6] text-muted-foreground">{desc}</p>
+      <div className="relative z-[2]">{children}</div>
     </Card>
   );
 }
@@ -107,7 +92,7 @@ export function Features() {
       <div className="mx-auto max-w-7xl px-6">
         <div className="mb-20 grid gap-6 md:grid-cols-[1fr_1.5fr] md:gap-20">
           <div>
-            <div className="inline-flex items-center gap-2.5 rounded-full border border-[rgba(91,139,255,0.18)] bg-[rgba(91,139,255,0.06)] px-4 py-1.5 font-mono text-[12px] uppercase tracking-[0.1em] text-brand-bright">
+            <div className="glass-pill inline-flex items-center gap-2.5 rounded-full border-transparent px-4 py-1.5 font-mono text-[12px] uppercase tracking-[0.1em] text-brand-bright">
               <span className="size-1.5 rounded-full bg-brand-bright shadow-[0_0_12px_var(--brand-bright)] animate-pulse-glow" />
               01 — Fonctionnalités
             </div>

@@ -18,7 +18,7 @@ export function Hero() {
       <div className="relative z-10 mx-auto max-w-[1200px] px-6">
         <Badge
           variant="outline"
-          className="mb-9 gap-2 rounded-full border-[rgba(91,139,255,0.18)] bg-[rgba(91,139,255,0.06)] px-4 py-1.5 font-mono text-[12px] uppercase tracking-[0.1em] text-brand-bright"
+          className="glass-pill mb-9 gap-2 rounded-full border-transparent px-4 py-1.5 font-mono text-[12px] uppercase tracking-[0.1em] text-brand-bright"
         >
           <span className="size-1.5 rounded-full bg-brand-bright shadow-[0_0_12px_var(--brand-bright)] animate-pulse-glow" />
           En direct · 6 cliniques pilotes en Algérie
@@ -44,7 +44,7 @@ export function Hero() {
           <Button
             asChild
             size="lg"
-            className="brand-gradient h-13 gap-2 rounded-full px-7 text-[15px] shadow-[0_14px_48px_rgba(0,23,108,0.55)] hover:translate-y-[-2px] hover:shadow-[0_18px_56px_rgba(0,23,108,0.7)]"
+            className="brand-gradient h-13 gap-2 rounded-full px-7 text-[15px] shadow-[inset_0_1px_0_rgba(255,255,255,0.25),0_14px_48px_rgba(0,23,108,0.55)] hover:translate-y-[-2px] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.30),0_18px_56px_rgba(0,23,108,0.7)]"
           >
             <Link href="#contact">
               Demander une démo
@@ -55,7 +55,7 @@ export function Hero() {
             asChild
             variant="outline"
             size="lg"
-            className="h-13 gap-2 rounded-full border-white/10 bg-white/[0.04] px-7 text-[15px] backdrop-blur-2xl hover:border-[rgba(91,139,255,0.30)] hover:bg-white/[0.08]"
+            className="glass-pill h-13 gap-2 rounded-full border-transparent px-7 text-[15px] hover:bg-white/[0.10]"
           >
             <Link href="#vsl">
               <Play className="size-3.5 fill-current" />

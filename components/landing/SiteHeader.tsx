@@ -13,30 +13,33 @@ const NAV_LINKS = [
 
 export function SiteHeader() {
   return (
-    <header className="sticky top-0 z-50 border-b border-border bg-background/70 backdrop-blur-2xl saturate-150">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-        <Link href="/" className="flex items-center gap-2.5 font-bold tracking-tight">
+    <header className="sticky top-0 z-50 px-3 pt-3 md:px-6 md:pt-4">
+      <div className="glass-pill mx-auto flex max-w-7xl items-center justify-between gap-4 rounded-full px-4 py-2">
+        <Link href="/" className="flex items-center gap-2.5 px-2 font-bold tracking-tight">
           <Image
             src="/logo.png"
             alt="ClinicService"
-            width={32}
-            height={32}
+            width={28}
+            height={28}
             className="drop-shadow-[0_0_14px_rgba(91,139,255,0.35)]"
           />
-          <span className="text-[17px]">ClinicService</span>
+          <span className="text-[16px]">ClinicService</span>
         </Link>
-        <nav className="hidden gap-8 lg:flex">
+        <nav className="hidden items-center gap-1 lg:flex">
           {NAV_LINKS.map((l) => (
             <Link
               key={l.href}
               href={l.href}
-              className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+              className="rounded-full px-4 py-2 text-sm text-muted-foreground transition-all hover:bg-white/[0.06] hover:text-foreground"
             >
               {l.label}
             </Link>
           ))}
         </nav>
-        <Button asChild className="brand-gradient rounded-full shadow-[0_8px_24px_rgba(0,23,108,0.5)] hover:shadow-[0_12px_32px_rgba(0,23,108,0.7)]">
+        <Button
+          asChild
+          className="brand-gradient rounded-full shadow-[inset_0_1px_0_rgba(255,255,255,0.20),0_8px_24px_rgba(0,23,108,0.5)] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.25),0_12px_32px_rgba(0,23,108,0.7)]"
+        >
           <Link href="#contact">
             Démo gratuite <ArrowRight className="size-4" />
           </Link>
