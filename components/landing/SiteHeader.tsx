@@ -38,7 +38,7 @@ export function SiteHeader() {
         </nav>
         <Button
           asChild
-          className="brand-gradient rounded-full shadow-[inset_0_1px_0_rgba(255,255,255,0.20),0_8px_24px_rgba(0,23,108,0.5)] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.25),0_12px_32px_rgba(0,23,108,0.7)]"
+          className="wave-grad rounded-full shadow-[inset_0_1px_0_rgba(255,255,255,0.20),0_8px_24px_rgba(0,23,108,0.5)] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.25),0_12px_32px_rgba(0,23,108,0.7)]"
         >
           <Link href="#contact">
             Démo gratuite <ArrowRight className="size-4" />

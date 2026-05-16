@@ -30,7 +30,7 @@ export function Cta() {
           <Button
             asChild
             size="lg"
-            className="brand-gradient h-13 gap-2 rounded-full px-7 text-[15px] shadow-[0_14px_48px_rgba(0,23,108,0.55)] hover:translate-y-[-2px] hover:shadow-[0_18px_56px_rgba(0,23,108,0.7)]"
+            className="wave-grad h-13 gap-2 rounded-full px-7 text-[15px] shadow-[inset_0_1px_0_rgba(255,255,255,0.25),0_14px_48px_rgba(0,23,108,0.55)] hover:translate-y-[-2px] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.30),0_18px_56px_rgba(0,23,108,0.7)]"
           >
             <Link href="https://wa.me/213XXXXXXXXX?text=Bonjour%2C%20je%20souhaite%20une%20d%C3%A9mo%20ClinicService">
               WhatsApp démo

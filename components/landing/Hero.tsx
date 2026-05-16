@@ -29,7 +29,7 @@ export function Hero() {
           <span className="text-blue-gradient font-serif italic">exploitation</span>
           <br />
           des cliniques{" "}
-          <span className="inline-block rounded-[22px] bg-gradient-to-b from-brand-mid to-brand px-4 pb-2.5 text-white shadow-[0_16px_48px_rgba(0,23,108,0.6),0_0_0_1px_rgba(91,139,255,0.22)]">
+          <span className="wave-grad inline-block rounded-[22px] px-4 pb-2.5 text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.30),0_16px_48px_rgba(0,23,108,0.6),0_0_0_1px_rgba(91,139,255,0.22)]">
             dentaires.
           </span>
         </h1>
@@ -44,7 +44,7 @@ export function Hero() {
           <Button
             asChild
             size="lg"
-            className="brand-gradient h-13 gap-2 rounded-full px-7 text-[15px] shadow-[inset_0_1px_0_rgba(255,255,255,0.25),0_14px_48px_rgba(0,23,108,0.55)] hover:translate-y-[-2px] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.30),0_18px_56px_rgba(0,23,108,0.7)]"
+            className="wave-grad h-13 gap-2 rounded-full px-7 text-[15px] shadow-[inset_0_1px_0_rgba(255,255,255,0.25),0_14px_48px_rgba(0,23,108,0.55)] hover:translate-y-[-2px] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.30),0_18px_56px_rgba(0,23,108,0.7)]"
           >
             <Link href="#contact">
               Demander une démo

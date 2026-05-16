@@ -15,17 +15,16 @@ type BCardProps = {
 function BCard({ num, Icon, title, desc, children, span = "", rowSpan = "", feature = false }: BCardProps) {
   return (
     <Card
-      className={`${feature ? "glass-blue" : "glass"} glass-shimmer glass-hover glass-caustic relative flex flex-col gap-0 overflow-hidden rounded-3xl p-8 ${span} ${rowSpan}`}
+      className={`${feature ? "glass-blue glass-shimmer glass-caustic" : "glass"} glass-hover relative flex flex-col gap-0 overflow-hidden rounded-2xl p-6 ${span} ${rowSpan}`}
     >
-
-      <div className="relative z-[2] mb-4 font-mono text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
+      <div className="relative z-[2] mb-3 font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
         {num}
       </div>
-      <span className="glass-pill relative z-[2] mb-6 inline-flex size-11 items-center justify-center rounded-xl border-transparent text-brand-bright">
-        <Icon className="size-5" />
+      <span className="glass-pill relative z-[2] mb-5 inline-flex size-10 items-center justify-center rounded-xl border-transparent text-brand-bright">
+        <Icon className="size-[18px]" />
       </span>
-      <h3 className="relative z-[2] mb-3 text-[22px] font-semibold leading-tight">{title}</h3>
-      <p className="relative z-[2] text-[14px] leading-[1.6] text-muted-foreground">{desc}</p>
+      <h3 className="relative z-[2] mb-2 text-[19px] font-semibold leading-tight">{title}</h3>
+      <p className="relative z-[2] text-[13px] leading-[1.55] text-muted-foreground">{desc}</p>
       <div className="relative z-[2]">{children}</div>
     </Card>
   );

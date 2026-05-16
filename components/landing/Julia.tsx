@@ -72,7 +72,7 @@ export function Julia() {
           {TILES.map((t) => (
             <div
               key={t.title}
-              className="glass glass-hover glass-shimmer glass-caustic rounded-2xl p-6"
+              className="glass glass-hover rounded-2xl p-5"
             >
               <div className="mb-4 font-mono text-[10px] uppercase tracking-[0.2em] text-brand-bright">{t.l}</div>
               <h4 className="mb-2 text-[18px] font-semibold">{t.title}</h4>
