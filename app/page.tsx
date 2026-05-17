@@ -4,7 +4,7 @@ import { Marquee } from "@/components/landing/Marquee";
 import { About } from "@/components/landing/About";
 import { StatsStrip } from "@/components/landing/StatsStrip";
 import { Features } from "@/components/landing/Features";
-import { FeatureShowcase } from "@/components/landing/FeatureShowcase";
+import { ProductShowcase } from "@/components/landing/ProductShowcase";
 import { AllFeatures } from "@/components/landing/AllFeatures";
 import { DashboardMockup } from "@/components/landing/DashboardMockup";
 import { Julia } from "@/components/landing/Julia";
@@ -27,7 +27,7 @@ export default function HomePage() {
         <About />
         <StatsStrip />
         <Features />
-        <FeatureShowcase />
+        <ProductShowcase />
         <AllFeatures />
         <DashboardMockup />
         <Julia />
