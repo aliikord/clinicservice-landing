@@ -10,7 +10,6 @@ type Feature = {
   cta: string;
   image: string;
   alt: string;
-  chips?: string[];
 };
 
 const FEATURES: Feature[] = [
@@ -19,90 +18,90 @@ const FEATURES: Feature[] = [
     eyebrow: "Imagerie DICOM",
     title: (
       <>
-        Vos radios, <span className="ital-blue">lues partout.</span>
+        Vos radios.
+        <br />
+        <span className="ital-blue">Sur iPad.</span>
       </>
     ),
-    desc:
-      "Panoramique, RVG, CBCT 3D — directement dans ClinicService. Aucun lecteur tiers à installer. Téléchargez le DICOM, ouvrez-le sur n'importe quel appareil de votre clinique.",
+    desc: "Panoramique, RVG, CBCT 3D — directement dans l'app. Aucun lecteur tiers.",
     cta: "Voir l'imagerie",
     image: "/features/01-xray.jpg",
-    alt: "Radio panoramique dentaire affichée sur tous les appareils",
-    chips: ["Pano", "RVG", "CBCT 3D", "Stockage cloud illimité"],
+    alt: "Radio panoramique dentaire dans ClinicService",
   },
   {
     num: "02",
     eyebrow: "Multi-plateforme",
     title: (
       <>
-        1 plateforme. <span className="ital-blue">6 appareils.</span>
+        Un seul produit.
+        <br />
+        <span className="ital-blue">Six appareils.</span>
       </>
     ),
-    desc:
-      "Web · iPhone · iPad · Mac · Windows · Android — tous synchronisés en temps réel. Le doctor sur iPad, la réception sur PC, le patient sur iPhone, le caissier sur Mac : tout le monde voit la même chose, instantanément.",
+    desc: "Web · iPhone · iPad · Mac · Windows · Android — synchronisés en temps réel.",
     cta: "Voir le produit",
     image: "/features/02-platforms.jpg",
-    alt: "ClinicService synchronisé sur 6 appareils",
-    chips: ["Web", "iPhone", "iPad", "Mac", "Windows", "Android"],
+    alt: "ClinicService sur 6 appareils synchronisés",
   },
   {
     num: "03",
     eyebrow: "Gain de temps",
     title: (
       <>
-        2 heures rendues, <span className="ital-blue">chaque jour.</span>
+        Deux heures rendues.
+        <br />
+        <span className="ital-blue">Chaque jour.</span>
       </>
     ),
-    desc:
-      "Sans changer votre logiciel actuel. ClinicService automatise les tâches répétitives : rappels patients, calculs commissions, réconciliation caisse, pointage staff. Vos équipes récupèrent du temps de soin.",
+    desc: "Rappels, calculs commissions, réconciliation caisse, pointage — automatisés.",
     cta: "Tester gratuitement",
     image: "/features/03-time.jpg",
     alt: "Sablier symbolisant le temps économisé",
-    chips: ["Automation IA", "Rappels auto", "Réconciliation auto", "Pointage QR"],
   },
   {
     num: "04",
     eyebrow: "Équipe & call center",
     title: (
       <>
-        8 agents. <span className="ital-blue">1 écran.</span>
+        Huit agents.
+        <br />
+        <span className="ital-blue">Un seul écran.</span>
       </>
     ),
-    desc:
-      "Pilotez votre call center en temps réel — appels entrants, RDV confirmés, scripts Darija, KPI par agent. Affectation automatique des leads, suivi des conversions, tableau de bord live pour le propriétaire.",
+    desc: "Live calls, KPI par agent, scripts Darija, suivi des conversions en direct.",
     cta: "Découvrir",
     image: "/features/04-agents.jpg",
     alt: "Vue d'une agente de call center dentaire",
-    chips: ["Live calls", "KPI agents", "Scripts Darija", "Conversions"],
   },
   {
     num: "05",
     eyebrow: "Expérience patient",
     title: (
       <>
-        Vos patients arrivent <span className="ital-blue">à l'heure.</span>
+        Vos patients arrivent
+        <br />
+        <span className="ital-blue">à l'heure.</span>
       </>
     ),
-    desc:
-      "Rappels SMS, WhatsApp et appel automatiques. Le patient confirme en un clic. Réduction prouvée des no-shows de 30 à 50 %. L'app patient lui permet de consulter ses radios, ordonnances et factures depuis son téléphone.",
+    desc: "Rappels SMS, WhatsApp et appel automatiques. No-shows divisés par deux.",
     cta: "Tester",
     image: "/features/05-patient.jpg",
-    alt: "Patiente recevant un rappel WhatsApp ClinicService",
-    chips: ["SMS", "WhatsApp", "Appel auto", "App patient"],
+    alt: "Patiente recevant un rappel WhatsApp",
   },
   {
     num: "06",
     eyebrow: "Caisse & paiement",
     title: (
       <>
-        Encaissé en <span className="ital-blue">4 secondes.</span>
+        Encaissé
+        <br />
+        <span className="ital-blue">en 4 secondes.</span>
       </>
     ),
-    desc:
-      "TPE, Edahabia, espèces, chèque — tout intégré. Splits commission automatiques au moment du paiement. Reçu imprimé, données dans le coffre-fort financier, salaires recalculés instantanément.",
+    desc: "TPE, Edahabia, espèces, chèque — tout intégré. Splits commission auto.",
     cta: "Voir le paiement",
     image: "/features/06-payment.jpg",
     alt: "Terminal de paiement TPE Edahabia",
-    chips: ["TPE / CIB", "Edahabia", "Espèces", "Chèque", "Splits auto"],
   },
 ];
 
@@ -111,99 +110,75 @@ export function FeatureShowcase() {
     <section className="border-t border-border py-32">
       <div className="mx-auto max-w-7xl px-6">
         {/* Section header */}
-        <div className="mb-24 grid gap-6 md:grid-cols-[1fr_1.5fr] md:gap-20">
-          <div>
-            <div className="glass-pill inline-flex items-center gap-2.5 rounded-full border-transparent px-4 py-1.5 font-mono text-[12px] uppercase tracking-[0.1em] text-brand-bright">
-              <span className="size-1.5 rounded-full bg-brand-bright shadow-[0_0_12px_var(--brand-bright)] animate-pulse-glow" />
-              02 — Six pouvoirs · une plateforme
-            </div>
+        <div className="mb-32 text-center">
+          <div className="glass-pill mx-auto mb-6 inline-flex items-center gap-2.5 rounded-full border-transparent px-4 py-1.5 font-mono text-[12px] uppercase tracking-[0.1em] text-brand-bright">
+            <span className="size-1.5 rounded-full bg-brand-bright shadow-[0_0_12px_var(--brand-bright)] animate-pulse-glow" />
+            02 — Six pouvoirs · une plateforme
           </div>
-          <h2 className="text-[clamp(36px,5vw,72px)] font-semibold leading-[1.05] tracking-[-0.03em]">
+          <h2 className="cream-gradient mx-auto max-w-[900px] text-[clamp(40px,6vw,84px)] font-bold leading-[0.98] tracking-[-0.035em]">
             Six pouvoirs qui font tourner <span className="ital-blue">votre clinique.</span>
           </h2>
         </div>
 
-        {/* Six alternating sections */}
-        <div className="flex flex-col gap-28 lg:gap-36">
+        {/* 6 alternating sections */}
+        <div className="flex flex-col gap-40">
           {FEATURES.map((f, i) => {
             const reverse = i % 2 === 1;
             return (
               <article
                 key={f.num}
-                className={`grid items-center gap-12 lg:gap-20 ${
+                className={`grid items-center gap-12 lg:gap-24 ${
                   reverse ? "lg:grid-cols-[1.1fr_1fr]" : "lg:grid-cols-[1fr_1.1fr]"
                 }`}
               >
-                {/* Text */}
+                {/* Text — cream editorial style */}
                 <div className={`flex flex-col ${reverse ? "lg:order-2" : ""}`}>
-                  <div className="glass-pill mb-5 inline-flex w-fit items-center gap-2.5 rounded-full border-transparent px-4 py-1.5 font-mono text-[11px] uppercase tracking-[0.15em] text-brand-bright">
-                    <span className="font-mono text-[10px] opacity-70">N°{f.num}</span>
-                    <span className="h-3 w-px bg-brand-bright/40" />
-                    {f.eyebrow}
+                  <div className="mb-7 flex items-center gap-3">
+                    <span className="font-mono text-[64px] font-light leading-none tracking-[-0.05em] text-cream/30 [-webkit-text-stroke:1px_var(--brand-bright)]">
+                      {f.num}
+                    </span>
+                    <span className="font-mono text-[11px] uppercase tracking-[0.20em] text-brand-bright">
+                      {f.eyebrow}
+                    </span>
                   </div>
 
-                  <h3 className="text-[clamp(38px,5vw,72px)] font-bold leading-[0.98] tracking-[-0.035em]">
+                  <h3 className="cream-gradient text-[clamp(48px,6.5vw,96px)] font-bold leading-[0.95] tracking-[-0.045em]">
                     {f.title}
                   </h3>
 
-                  <p className="mt-7 max-w-[540px] text-[16px] leading-[1.65] text-muted-foreground">
+                  <p className="mt-8 max-w-[460px] text-[18px] leading-[1.5] text-cream/70">
                     {f.desc}
                   </p>
 
-                  {f.chips && (
-                    <div className="mt-7 flex flex-wrap gap-2">
-                      {f.chips.map((chip) => (
-                        <span
-                          key={chip}
-                          className="glass-pill rounded-full border-transparent px-3.5 py-1.5 font-mono text-[11px] uppercase tracking-[0.08em] text-muted-foreground"
-                        >
-                          {chip}
-                        </span>
-                      ))}
-                    </div>
-                  )}
-
-                  <div className="mt-9 flex items-center gap-5">
+                  <div className="mt-10">
                     <Link
                       href="#contact"
-                      className="wave-grad inline-flex items-center gap-2 rounded-full px-6 py-3 text-[14px] font-medium text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.25),0_12px_36px_rgba(0,23,108,0.5)] transition-all hover:translate-y-[-2px] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.30),0_16px_44px_rgba(0,23,108,0.65)]"
+                      className="cyan-pill inline-flex items-center gap-2 rounded-full px-7 py-3.5 text-[15px] font-medium transition-all"
                     >
                       {f.cta}
                       <ArrowRight className="size-4" />
                     </Link>
-                    <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground italic">
-                      Leader dentaire d&apos;Algérie
+                  </div>
+
+                  <div className="mt-10">
+                    <span className="outline-tag">
+                      Rejoignez le leader dentaire d&apos;Algérie
                     </span>
                   </div>
                 </div>
 
-                {/* Image */}
+                {/* Image — cyan-rim glow */}
                 <div className={`relative ${reverse ? "lg:order-1" : ""}`}>
-                  {/* Halo */}
-                  <div
-                    aria-hidden
-                    className="pointer-events-none absolute inset-[-15%] z-0"
-                    style={{
-                      background:
-                        "radial-gradient(ellipse at center, rgba(91,139,255,0.30) 0%, rgba(0,23,108,0.20) 35%, transparent 70%)",
-                      filter: "blur(60px)",
-                    }}
-                  />
-                  {/* Frame */}
-                  <div className="glass-strong glass-shimmer relative z-10 overflow-hidden rounded-[28px] p-2 transition-transform hover:scale-[1.02]">
+                  <div className="cyan-rim relative overflow-hidden rounded-[28px]">
                     <img
                       src={asset(f.image)}
                       alt={f.alt}
                       width={1440}
                       height={1440}
                       loading="lazy"
-                      className="aspect-square w-full rounded-3xl object-cover"
+                      className="block aspect-square w-full rounded-[28px] object-cover"
                     />
                   </div>
-                  {/* Floating number tag */}
-                  <span className="absolute -top-3 right-4 z-20 rounded-full bg-gradient-to-b from-brand-mid to-brand px-4 py-1.5 font-mono text-[11px] font-bold uppercase tracking-[0.15em] text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.30),0_8px_24px_rgba(0,23,108,0.55)]">
-                    {f.num}
-                  </span>
                 </div>
               </article>
             );
