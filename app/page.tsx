@@ -11,6 +11,7 @@ import { Julia } from "@/components/landing/Julia";
 import { Process } from "@/components/landing/Process";
 import { Testimonial } from "@/components/landing/Testimonial";
 import { CompareTable } from "@/components/landing/CompareTable";
+import { Pricing } from "@/components/landing/Pricing";
 import { Faq } from "@/components/landing/Faq";
 import { Cta } from "@/components/landing/Cta";
 import { SiteFooter } from "@/components/landing/SiteFooter";
@@ -34,6 +35,7 @@ export default function HomePage() {
         <Process />
         <Testimonial />
         <CompareTable />
+        <Pricing />
         <Faq />
         <Cta />
       </main>

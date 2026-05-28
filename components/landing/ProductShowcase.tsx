@@ -11,17 +11,21 @@ type Ad = {
 };
 
 const ADS: Ad[] = [
-  { num: "01", file: "11_live-call__1x1_1080.jpg",     eyebrow: "Call tracking",             headline: "Aucun appel patient ne tombe",            sub: "100 % des conversations liées au dossier patient — automatiquement.",                                       alt: "Aucun appel patient ne tombe" },
-  { num: "02", file: "10_multi-clinic__1x1_1080.jpg",  eyebrow: "Multi-clinic command center", headline: "5 cabinets. 1 vue.",                    sub: "Pilotez votre groupe dentaire depuis une seule plateforme.",                                                  alt: "5 cabinets, 1 vue" },
-  { num: "03", file: "09_patient-file__1x1_1080.jpg",  eyebrow: "Dossier 360°",              headline: "Le dossier patient à 360°",               sub: "Photos, radios, RDV, paiements, historique — un seul endroit.",                                              alt: "Dossier patient 360°" },
-  { num: "04", file: "08_call-center__1x1_1080.jpg",   eyebrow: "Call center temps réel",    headline: "8 agents. 1 écran.",                      sub: "Live calls, KPI par agent, scripts Darija, suivi des conversions en direct.",                                alt: "8 agents, 1 écran" },
-  { num: "05", file: "07_dashboard__1x1_1080.jpg",     eyebrow: "KPI dashboard live",        headline: "Vos chiffres, en temps réel",             sub: "RDV, no-show, CA, taux conversion — actualisés à la seconde.",                                              alt: "Dashboard KPI temps réel" },
-  { num: "06", file: "06_tpe__1x1_1080.jpg",           eyebrow: "Caisse & paiement",         headline: "Encaissé en 4 secondes",                  sub: "TPE, Edahabia, espèces — tout intégré au dossier patient.",                                                  alt: "TPE, Edahabia, espèces" },
-  { num: "07", file: "05_kiosk__1x1_1080.jpg",         eyebrow: "File d'attente automatisée", headline: "File d'attente automatisée",            sub: "Borne tactile + notification patient automatique.",                                                          alt: "Borne d'attente automatisée" },
-  { num: "08", file: "04_multi-devices__1x1_1080.jpg", eyebrow: "Multi-plateforme",          headline: "1 plateforme. 6 appareils.",              sub: "Web, iPhone, iPad, Mac, Windows, Android — synchronisés.",                                                   alt: "6 appareils synchronisés" },
-  { num: "09", file: "03_macbook__1x1_1080.jpg",       eyebrow: "Mac & PC desktop",          headline: "Votre cabinet, sur Mac",                  sub: "Tout votre cabinet sur un seul écran. Sync temps réel.",                                                     alt: "Cabinet sur Mac" },
-  { num: "10", file: "02_iphone-app__1x1_1080.jpg",    eyebrow: "App mobile",                headline: "Votre cabinet, dans votre poche",         sub: "App iPhone et Android. Hors-ligne et en ligne.",                                                             alt: "App mobile iPhone & Android" },
-  { num: "11", file: "01_ipad-xray__1x1_1080.jpg",     eyebrow: "Imagerie DICOM",            headline: "Vos radios. Sur iPad.",                   sub: "Panoramique, RVG, CBCT 3D — directement dans l'app.",                                                        alt: "Imagerie DICOM sur iPad" },
+  { num: "01", file: "01_ipad-xray__1x1_1080.jpg",      eyebrow: "Imagerie DICOM",            headline: "Vos radios. Sur iPad.",            sub: "Panoramique, RVG, CBCT 3D — directement dans l'app. Aucun lecteur tiers.",        alt: "Imagerie DICOM sur iPad" },
+  { num: "02", file: "09_patient-file__1x1_1080.jpg",   eyebrow: "Dossier 360°",              headline: "Le dossier patient à 360°",        sub: "Photos, radios, RDV, paiements, historique — un seul endroit.",                   alt: "Dossier patient 360°" },
+  { num: "03", file: "13_treatment-plan__1x1_1080.jpg", eyebrow: "Plan de traitement",        headline: "Le plan, de A à Z.",               sub: "Étapes, checklist, progression — du devis à la pose. Validé et suivi.",           alt: "Plan de traitement suivi" },
+  { num: "04", file: "12_julia__1x1_1080.jpg",          eyebrow: "Julia AI",                  headline: "Julia, votre IA dentaire.",        sub: "Elle connaît votre clinique, vos protocoles, vos patients. Vocal en AR · FR · EN.", alt: "Julia, assistante IA dentaire" },
+  { num: "05", file: "07_dashboard__1x1_1080.jpg",      eyebrow: "KPI dashboard live",        headline: "Vos chiffres, en temps réel",      sub: "RDV, no-show, CA, taux conversion — actualisés à la seconde.",                    alt: "Dashboard KPI temps réel" },
+  { num: "06", file: "06_tpe__1x1_1080.jpg",            eyebrow: "Caisse & paiement",         headline: "Encaissé en 4 secondes",           sub: "TPE, Edahabia, espèces — tout intégré au dossier patient.",                       alt: "TPE, Edahabia, espèces" },
+  { num: "07", file: "14_stock__1x1_1080.jpg",          eyebrow: "Gestion de stock",          headline: "Stock, jamais à court.",           sub: "Alertes rupture, scanner IA, bons de commande — automatisés.",                    alt: "Gestion de stock avec scanner IA" },
+  { num: "08", file: "16_workflow__1x1_1080.jpg",       eyebrow: "Workflow visuel",           headline: "Votre flux. Sans code.",           sub: "Glisser-déposer : départements, boxes, file d'attente. Votre cabinet, modélisé.", alt: "Éditeur de workflow visuel" },
+  { num: "09", file: "05_kiosk__1x1_1080.jpg",          eyebrow: "File d'attente automatisée", headline: "File d'attente automatisée",      sub: "Borne tactile + notification patient automatique.",                               alt: "Borne d'attente automatisée" },
+  { num: "10", file: "15_attendance__1x1_1080.jpg",     eyebrow: "Pointage staff",            headline: "Pointage, en 1 scan.",             sub: "Borne QR à l'entrée. Arrivée, départ, heures supp — automatiques.",               alt: "Pointage staff par QR code" },
+  { num: "11", file: "17_languages__1x1_1080.jpg",      eyebrow: "3 langues",                 headline: "3 langues. 1 équipe.",             sub: "Interface complète en français, arabe et anglais. Chacun dans sa langue.",        alt: "Interface en 3 langues" },
+  { num: "12", file: "04_multi-devices__1x1_1080.jpg",  eyebrow: "Multi-plateforme",          headline: "1 plateforme. 6 appareils.",       sub: "Web, iPhone, iPad, Mac, Windows, Android — synchronisés.",                        alt: "6 appareils synchronisés" },
+  { num: "13", file: "03_macbook__1x1_1080.jpg",        eyebrow: "Mac & PC desktop",          headline: "Votre cabinet, sur Mac",           sub: "Tout votre cabinet sur un seul écran. Sync temps réel.",                          alt: "Cabinet sur Mac" },
+  { num: "14", file: "02_iphone-app__1x1_1080.jpg",     eyebrow: "App mobile",                headline: "Votre cabinet, dans votre poche", sub: "App iPhone et Android. Hors-ligne et en ligne.",                                  alt: "App mobile iPhone & Android" },
+  { num: "15", file: "10_multi-clinic__1x1_1080.jpg",   eyebrow: "Multi-clinic command center", headline: "5 cabinets. 1 vue.",             sub: "Pilotez votre groupe dentaire depuis une seule plateforme.",                      alt: "5 cabinets, 1 vue" },
 ];
 
 export function ProductShowcase() {
@@ -47,10 +51,10 @@ export function ProductShowcase() {
         <div className="mb-24 text-center">
           <div className="glass-pill mx-auto mb-6 inline-flex items-center gap-2.5 rounded-full border-transparent px-4 py-1.5 font-mono text-[12px] uppercase tracking-[0.1em] text-brand-bright">
             <span className="size-1.5 rounded-full bg-brand-bright shadow-[0_0_12px_var(--brand-bright)] animate-pulse-glow" />
-            02 — Onze pouvoirs · une plateforme
+            02 — Une plateforme · tous vos pouvoirs
           </div>
           <h2 className="cream-gradient mx-auto max-w-[920px] text-[clamp(40px,6vw,84px)] font-bold leading-[0.98] tracking-[-0.035em]">
-            Onze pouvoirs qui font tourner <span className="ital-blue">votre clinique.</span>
+            Tous les pouvoirs qui font tourner <span className="ital-blue">votre clinique.</span>
           </h2>
           <p className="mx-auto mt-6 max-w-[600px] text-[16px] leading-[1.6] text-muted-foreground">
             Du premier appel patient jusqu&apos;à l&apos;encaissement — chaque étape de votre quotidien clinique, dans une seule plateforme.
@@ -86,7 +90,7 @@ export function ProductShowcase() {
                       </span>
                       <span className="h-px flex-1 bg-gradient-to-r from-brand-bright/60 via-brand-bright/20 to-transparent" />
                       <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-cream/40">
-                        / 11
+                        / {String(ADS.length).padStart(2, "0")}
                       </span>
                     </div>
 
@@ -201,7 +205,7 @@ export function ProductShowcase() {
         <div className="mt-24 flex flex-col items-center gap-4 text-center">
           <div className="glass-pill inline-flex items-center gap-2.5 rounded-full border-transparent px-4 py-1.5 font-mono text-[11px] uppercase tracking-[0.18em] text-brand-bright">
             <span className="size-1.5 rounded-full bg-brand-bright shadow-[0_0_12px_var(--brand-bright)] animate-pulse-glow" />
-            11 fonctionnalités · 1 plateforme · 0 module à débloquer
+            {ADS.length} fonctionnalités · 1 plateforme · 0 module à débloquer
           </div>
           <h3 className="cream-gradient mx-auto max-w-[640px] text-[clamp(24px,3.5vw,44px)] font-bold leading-[1.05] tracking-[-0.03em]">
             Tout votre cabinet, <span className="ital-blue">en un seul produit.</span>

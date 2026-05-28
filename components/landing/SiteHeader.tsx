@@ -7,6 +7,7 @@ const NAV_LINKS = [
   { href: "#vsl", label: "Démo vidéo" },
   { href: "#features", label: "Fonctionnalités" },
   { href: "#julia", label: "Julia AI" },
+  { href: "#pricing", label: "Tarifs" },
   { href: "#process", label: "Démarrage" },
   { href: "#faq", label: "FAQ" },
 ];
