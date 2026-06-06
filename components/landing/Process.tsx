@@ -64,9 +64,9 @@ export function Process() {
                 <span className="glass-pill mb-4.5 inline-flex items-center gap-2 rounded-full border-transparent px-3.5 py-1.5 font-mono text-[11px] uppercase tracking-[0.15em] text-brand-bright">
                   {s.tag}
                 </span>
-                <h4 className="text-[clamp(26px,3.2vw,36px)] font-semibold leading-[1.1] tracking-[-0.02em]">
+                <h3 className="text-[clamp(26px,3.2vw,36px)] font-semibold leading-[1.1] tracking-[-0.02em]">
                   {s.title}
-                </h4>
+                </h3>
               </div>
               <p className="text-[15px] leading-[1.7] text-muted-foreground">{s.desc}</p>
             </div>

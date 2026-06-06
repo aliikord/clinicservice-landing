@@ -75,7 +75,7 @@ export function Julia() {
               className="glass glass-hover rounded-2xl p-5"
             >
               <div className="mb-4 font-mono text-[10px] uppercase tracking-[0.2em] text-brand-bright">{t.l}</div>
-              <h4 className="mb-2 text-[18px] font-semibold">{t.title}</h4>
+              <h3 className="mb-2 text-[18px] font-semibold">{t.title}</h3>
               <p className="text-[13px] leading-[1.6] text-muted-foreground">{t.desc}</p>
             </div>
           ))}

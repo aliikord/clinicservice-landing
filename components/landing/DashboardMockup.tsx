@@ -75,7 +75,7 @@ export function DashboardMockup() {
             </div>
             {/* Body */}
             <div className="grid min-h-[460px] grid-cols-1 md:grid-cols-[210px_1fr]">
-              <aside className="hidden flex-col gap-0.5 border-r border-border bg-card/40 p-4 md:flex">
+              <div className="hidden flex-col gap-0.5 border-r border-border bg-card/40 p-4 md:flex">
                 <div className="mb-3 flex items-center gap-2.5 px-2 py-1.5">
                   <img
                     src={asset("/logo.png")}
@@ -99,9 +99,9 @@ export function DashboardMockup() {
                     {label}
                   </div>
                 ))}
-              </aside>
+              </div>
 
-              <main className="flex flex-col gap-3 p-5">
+              <div className="flex flex-col gap-3 p-5">
                 <div className="flex items-center justify-between">
                   <span className="text-[13px] font-semibold">Tableau de bord — Aujourd&apos;hui</span>
                   <span className="flex items-center gap-2 font-mono text-[10px] text-muted-foreground">
@@ -216,7 +216,7 @@ export function DashboardMockup() {
                   </span>
                   <span className="ml-auto font-mono text-[10px] text-muted-foreground">à l&apos;instant</span>
                 </div>
-              </main>
+              </div>
             </div>
           </div>
         </div>

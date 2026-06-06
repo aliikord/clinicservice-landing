@@ -140,7 +140,7 @@
   --card-foreground: #f5f6f8;
   --popover: #111114;
   --popover-foreground: #f5f6f8;
-  --primary: #5b8bff;
+  --primary: #3360d6;
   --primary-foreground: #ffffff;
   --secondary: #16161a;
   --secondary-foreground: #f5f6f8;
@@ -162,7 +162,7 @@
   --card-foreground: #f5f6f8;
   --popover: #111114;
   --popover-foreground: #f5f6f8;
-  --primary: #5b8bff;
+  --primary: #3360d6;
   --primary-foreground: #ffffff;
   --secondary: #16161a;
   --secondary-foreground: #f5f6f8;
@@ -548,4 +548,35 @@
       inset 0 1px 0 rgba(255,255,255,0.50),
       0 16px 44px rgba(45,126,184,0.70);
   }
+}
+
+/* ===== Respect prefers-reduced-motion (WCAG 2.3.3) =====
+   Kills the infinite decorative loops (aurora, mouse glow, marquee, float,
+   waves, beams) for users who ask for reduced motion. Content stays visible. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .aurora-blob,
+  .mouse-glow,
+  .float-y,
+  .wave-grad,
+  .wave-grad-slow,
+  .wave-text,
+  .animate-marquee,
+  [class*="animate-"] {
+    animation: none !important;
+  }
+}
+
+/* ===== Mobile performance — drop the GPU-heavy aurora on small screens =====
+   The full-viewport blurred/blended/scaling blobs are the single biggest paint
+   cost on phones (most of the Algerian audience). Desktop keeps them. */
+@media (max-width: 768px) {
+  .aurora { display: none; }
 }

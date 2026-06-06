@@ -1,10 +1,10 @@
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { LeadForm } from "./LeadForm";
+import { CONTACT, whatsappLink, whatsappReady } from "@/lib/site";
 
 export function Cta() {
   return (
-    <section id="contact" className="relative overflow-hidden py-40">
+    <section id="contact" className="relative overflow-hidden py-32">
       <div
         aria-hidden
         className="pointer-events-none absolute left-1/2 -bottom-[300px] z-0 h-[800px] w-[1400px] -translate-x-1/2 blur-[50px]"
@@ -23,35 +23,36 @@ export function Cta() {
           <br />
           votre <span className="ital-gradient">clinique ?</span>
         </h2>
-        <p className="mx-auto mb-9 max-w-[520px] text-[18px] leading-[1.6] text-muted-foreground">
-          Réservez une démo de 30 minutes avec notre équipe. Installation gratuite chez vous pendant 30 jours. Vous décidez ensuite.
+        <p className="mx-auto mb-2 max-w-[540px] text-[18px] leading-[1.6] text-muted-foreground">
+          Laissez vos coordonnées — on vous rappelle sous 2h pour une démo de 30 minutes.
+          Installation gratuite chez vous pendant 30 jours. Vous décidez ensuite.
         </p>
-        <div className="flex flex-wrap justify-center gap-3.5">
-          <Button
-            asChild
-            size="lg"
-            className="wave-grad h-13 gap-2 rounded-full px-7 text-[15px] shadow-[inset_0_1px_0_rgba(255,255,255,0.25),0_14px_48px_rgba(0,23,108,0.55)] hover:translate-y-[-2px] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.30),0_18px_56px_rgba(0,23,108,0.7)]"
-          >
-            <Link href="https://wa.me/213XXXXXXXXX?text=Bonjour%2C%20je%20souhaite%20une%20d%C3%A9mo%20ClinicService">
-              WhatsApp démo
-              <ArrowRight className="size-4" />
-            </Link>
-          </Button>
-          <Button
-            asChild
-            variant="outline"
-            size="lg"
-            className="glass-pill h-13 gap-2 rounded-full border-transparent px-7 text-[15px] hover:bg-white/[0.10]"
-          >
-            <Link href="mailto:contact@clinicservice.app">contact@clinicservice.app</Link>
-          </Button>
-        </div>
-        <div className="mt-8 flex flex-wrap justify-center gap-4 font-mono text-[12px] uppercase tracking-[0.1em] text-muted-foreground">
-          <span>+213 XX XX XX XX</span>
+
+        <LeadForm />
+
+        <div className="mt-8 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 font-mono text-[12px] uppercase tracking-[0.1em] text-muted-foreground">
+          {whatsappReady && (
+            <>
+              <Link
+                href={whatsappLink("Bonjour, je souhaite une démo ClinicService")}
+                className="text-brand-bright hover:underline"
+              >
+                WhatsApp
+              </Link>
+              <span className="text-border">·</span>
+            </>
+          )}
+          <Link href={`mailto:${CONTACT.email}`} className="hover:text-foreground">
+            {CONTACT.email}
+          </Link>
+          {!CONTACT.phoneDisplay.includes("X") && (
+            <>
+              <span className="text-border">·</span>
+              <span>{CONTACT.phoneDisplay}</span>
+            </>
+          )}
           <span className="text-border">·</span>
-          <span>Alger, Algérie</span>
-          <span className="text-border">·</span>
-          <span>Réponse &lt; 2h</span>
+          <span>{CONTACT.city}</span>
         </div>
       </div>
     </section>

@@ -147,7 +147,7 @@ export function Pricing() {
               }`}
             >
               {plan.featured && (
-                <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-gradient-to-r from-brand-mid to-brand-bright px-3.5 py-1 font-mono text-[10px] uppercase tracking-[0.18em] text-white shadow-[0_4px_16px_rgba(91,139,255,0.5)]">
+                <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-gradient-to-r from-brand to-brand-mid px-3.5 py-1 font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-white shadow-[0_4px_16px_rgba(0,23,108,0.5)]">
                   Le plus populaire
                 </span>
               )}
@@ -220,7 +220,7 @@ export function Pricing() {
         <div className="mt-12 flex flex-col items-center gap-3 text-center">
           <div className="glass-pill inline-flex flex-wrap items-center justify-center gap-2.5 rounded-full border-transparent px-5 py-2 text-[13px] text-cream/80">
             <span className="size-1.5 rounded-full bg-brand-bright shadow-[0_0_10px_var(--brand-bright)] animate-pulse-glow" />
-            Essai 14 jours gratuit — installé pour vous, données migrées, staff formé. Sans carte bancaire.
+            Essai 30 jours gratuit — installé pour vous, données migrées, staff formé. Sans carte bancaire.
           </div>
           <p className="max-w-[560px] text-[14px] leading-[1.6] text-muted-foreground">
             <strong className="text-cream/90">Membre fondateur :</strong> les 20 premiers cabinets verrouillent <strong className="text-brand-bright">−30 %</strong> à vie. Un seul no-show récupéré (5 000–50 000 DA) rembourse l&apos;abonnement en une semaine.
